@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carta — Pâtisserie Boulangerie Reiger</title>
+  <meta name="description" content="Carta completa de Pâtisserie Boulangerie Reiger. Pastelería, bollería, pan artesanal, chocolatería y bebidas belgas en El Campello.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root {
+  --cream:    #fdf8f2;
+  --warm:     #f5ede2;
+  --blush:    #eeddd0;
+  --tan:      #d4b99a;
+  --bronze:   #b07848;
+  --copper:   #c98a58;
+  --earth:    #8b5e38;
+  --dark:     #1c1208;
+  --dark-2:   #2e1d0e;
+  --dark-3:   #3d2a18;
+  --text:     #1c1208;
+  --text-2:   #5a3d28;
+  --text-3:   #9a7a60;
+  --inv:      #fdf8f2;
+  --f-serif:  'Cormorant Garamond', Georgia, serif;
+  --f-sans:   'DM Sans', system-ui, sans-serif;
+  --ease:     cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ============================================================
+   RESET
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { background: var(--cream); color: var(--text); font-family: var(--f-sans); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+button, input, textarea, select { font: inherit; }
+
+/* ============================================================
+   SKIP LINK
+   ============================================================ */
+.skip { position: absolute; top: -200%; left: 1rem; background: var(--bronze); color: var(--inv); padding: .5rem 1rem; z-index: 9999; transition: top .2s; }
+.skip:focus { top: 1rem; }
+
+/* ============================================================
+   NAVBAR
+   ============================================================ */
+#nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  padding: 1.4rem 2.5rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+  transition: padding .4s var(--ease), background .4s, border-color .4s;
+  border-bottom: 1px solid transparent;
+}
+#nav.scrolled {
+  background: rgba(253,248,242,.93);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  padding: .9rem 2.5rem;
+  border-color: rgba(176,120,72,.15);
+}
+#nav.dark-mode { color: var(--inv); }
+#nav.dark-mode .nav-link { color: rgba(253,248,242,.75); }
+#nav.dark-mode .nav-link:hover { color: var(--inv); }
+#nav.dark-mode.scrolled { color: var(--text); }
+#nav.dark-mode.scrolled .nav-link { color: var(--text-2); }
+#nav.dark-mode.scrolled .nav-link:hover { color: var(--bronze); }
+#nav.dark-mode.scrolled .flag-btn { border-color: rgba(176,120,72,.2); }
+#nav.dark-mode.scrolled .flag-btn:hover,
+#nav.dark-mode.scrolled .flag-btn.active { border-color: var(--copper); }
+
+.nav-logo {
+  font-family: var(--f-serif);
+  font-size: .95rem; font-weight: 400; letter-spacing: .06em;
+  white-space: nowrap; flex-shrink: 0;
+}
+.nav-logo em { font-style: italic; color: var(--copper); }
+#nav.dark-mode .nav-logo em { color: var(--tan); }
+#nav.dark-mode.scrolled .nav-logo em { color: var(--copper); }
+
+.nav-links { display: flex; gap: 2rem; }
+.nav-link {
+  font-size: .68rem; font-weight: 400; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--text-2); transition: color .25s; cursor: pointer;
+}
+.nav-link:hover { color: var(--bronze); }
+.nav-link:focus-visible { outline: 2px solid var(--bronze); outline-offset: 3px; border-radius: 2px; }
+
+.nav-right { display: flex; align-items: center; gap: .75rem; flex-shrink: 0; }
+
+/* ── FLAG BUTTONS ── */
+.lang-flags { display: flex; gap: 4px; align-items: center; }
+
+.flag-btn {
+  display: flex; align-items: center; gap: 5px;
+  background: none; border: 1px solid rgba(253,248,242,.25);
+  border-radius: 6px; cursor: pointer; padding: 4px 7px;
+  transition: all .22s var(--ease);
+  min-width: 44px; min-height: 34px; justify-content: center;
+}
+#nav.scrolled .flag-btn { border-color: rgba(176,120,72,.18); }
+
+.flag-btn:hover {
+  background: rgba(201,138,88,.18);
+  border-color: var(--copper);
+}
+.flag-btn.active {
+  background: var(--copper);
+  border-color: var(--copper);
+}
+.flag-btn:focus-visible { outline: 2px solid var(--tan); outline-offset: 2px; }
+
+.flag-emoji { font-size: 1rem; line-height: 1; }
+.flag-code {
+  font-size: .55rem; font-weight: 500; letter-spacing: .08em;
+  text-transform: uppercase;
+  color: rgba(253,248,242,.85);
+  transition: color .22s;
+}
+.flag-btn.active .flag-code { color: var(--inv); }
+#nav.scrolled .flag-code { color: var(--text-2); }
+#nav.scrolled .flag-btn.active .flag-code { color: var(--inv); }
+#nav.scrolled .flag-btn:hover .flag-code { color: var(--inv); }
+
+/* Hamburger */
+.hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer;
+  padding: 6px; min-width: 44px; min-height: 44px;
+  align-items: center; justify-content: center;
+}
+.h-bar { width: 20px; height: 1.5px; background: currentColor; transition: all .3s; display: block; }
+.hamburger[aria-expanded=true] .h-bar:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.hamburger[aria-expanded=true] .h-bar:nth-child(2) { opacity: 0; }
+.hamburger[aria-expanded=true] .h-bar:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* Mobile nav */
+.mob-nav {
+  display: none; position: fixed; inset: 0; z-index: 190;
+  background: var(--dark); flex-direction: column; align-items: center; justify-content: center;
+  gap: 2.5rem; opacity: 0; transition: opacity .3s;
+}
+.mob-nav.open { display: flex; opacity: 1; }
+.mob-nav a {
+  font-family: var(--f-serif); font-size: clamp(2rem,6vw,3.5rem);
+  font-weight: 300; color: var(--inv); letter-spacing: .04em;
+  transition: color .2s; cursor: pointer;
+}
+.mob-nav a:hover { color: var(--tan); }
+.mob-close {
+  position: absolute; top: 1.5rem; right: 1.5rem;
+  background: none; border: none; color: rgba(253,248,242,.6); cursor: pointer;
+  min-width: 44px; min-height: 44px; display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; transition: color .2s;
+}
+.mob-close:hover { color: var(--inv); }
+
+.mob-lang {
+  display: flex; gap: 8px; margin-top: 1rem;
+}
+.mob-flag {
+  display: flex; align-items: center; gap: 5px;
+  background: rgba(253,248,242,.06); border: 1px solid rgba(253,248,242,.15);
+  border-radius: 6px; padding: 6px 12px; cursor: pointer;
+  font-size: .65rem; letter-spacing: .1em; text-transform: uppercase;
+  color: rgba(253,248,242,.5); transition: all .2s; min-height: 44px;
+  background: none; font-family: var(--f-sans);
+}
+.mob-flag .flag-emoji { font-size: 1.1rem; }
+.mob-flag.active { background: rgba(201,138,88,.2); border-color: var(--copper); color: var(--tan); }
+.mob-flag:hover { border-color: var(--tan); color: rgba(253,248,242,.8); }
+
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  #nav { padding: 1.2rem 1.5rem; }
+  #nav.scrolled { padding: .85rem 1.5rem; }
+  .flag-code { display: none; }
+}
+
+/* ============================================================
+   COMMON
+   ============================================================ */
+.section-py { padding: clamp(5rem,10vw,8rem) 0; }
+.container { max-width: 1280px; margin: 0 auto; padding: 0 clamp(1.25rem,5vw,3rem); }
+.eyebrow { font-size: .62rem; font-weight: 400; letter-spacing: .45em; text-transform: uppercase; color: var(--copper); display: block; margin-bottom: 1.25rem; }
+.eyebrow.light { color: var(--tan); }
+.section-title { font-family: var(--f-serif); font-size: clamp(2rem,4.5vw,3.5rem); font-weight: 300; line-height: 1.1; color: var(--text); }
+.section-title em { font-style: italic; color: var(--copper); }
+.section-title.light { color: var(--inv); }
+.section-title.light em { color: var(--tan); }
+
+/* Reveal animation */
+.r { opacity: 0; transform: translateY(30px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+.r.vis { opacity: 1; transform: none; }
+.r.d1 { transition-delay: .1s; }
+.r.d2 { transition-delay: .2s; }
+.r.d3 { transition-delay: .3s; }
+.r.d4 { transition-delay: .4s; }
+@media (prefers-reduced-motion: reduce) {
+  .r { opacity: 1; transform: none; transition: none; }
+  *,*::before,*::after { animation-duration:.01ms !important; transition-duration:.01ms !important; }
+}
+
+/* ============================================================
+   HERO BANNER (CARTA)
+   ============================================================ */
+#carta-hero {
+  position: relative; min-height: 40vh; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.carta-hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background-image: url('https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=1920&q=80');
+  background-size: cover; background-position: center;
+  transform: scale(1.05);
+  will-change: transform;
+}
+.carta-hero-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(160deg, rgba(18,10,4,.82) 0%, rgba(28,18,8,.65) 45%, rgba(40,24,10,.78) 100%);
+}
+.carta-hero-content {
+  position: relative; z-index: 3;
+  text-align: center; padding: 6rem 2rem 3rem;
+  max-width: 900px; width: 100%;
+}
+.carta-hero-tag {
+  display: inline-block;
+  font-size: .6rem; font-weight: 400; letter-spacing: .5em; text-transform: uppercase;
+  color: var(--tan); border: 1px solid rgba(212,185,154,.35);
+  padding: .5rem 1.5rem; border-radius: 100px; margin-bottom: 2rem;
+  opacity: 0; animation: fadeSlideUp .8s var(--ease) .3s forwards;
+}
+.carta-hero-title {
+  font-family: var(--f-serif);
+  font-size: clamp(2.5rem,7vw,5.5rem);
+  font-weight: 300; line-height: .95; color: var(--inv); margin-bottom: 1rem;
+  opacity: 0; animation: fadeSlideUp .9s var(--ease) .5s forwards;
+}
+.carta-hero-title em { font-style: italic; color: var(--tan); }
+.carta-hero-sub {
+  font-family: var(--f-serif); font-style: italic;
+  font-size: clamp(.9rem,2vw,1.25rem); font-weight: 300;
+  color: rgba(253,248,242,.55); margin-bottom: 1.5rem;
+  opacity: 0; animation: fadeSlideUp .8s var(--ease) .75s forwards;
+}
+.back-link {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-size: .65rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 400;
+  color: var(--tan); border: 1px solid rgba(212,185,154,.3);
+  padding: .6rem 1.5rem; border-radius: 100px;
+  transition: all .25s; cursor: pointer;
+  opacity: 0; animation: fadeSlideUp .8s var(--ease) .9s forwards;
+}
+.back-link:hover { background: rgba(253,248,242,.1); border-color: rgba(212,185,154,.6); color: var(--inv); }
+.back-link svg { transition: transform .25s; }
+.back-link:hover svg { transform: translateX(-3px); }
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   CATEGORY SECTIONS
+   ============================================================ */
+.menu-section { padding: clamp(3rem,6vw,5rem) 0 0; }
+.menu-section:last-of-type { padding-bottom: clamp(3rem,6vw,5rem); }
+
+.menu-section.bg-dark { background: var(--dark-2); }
+.menu-section.bg-cream { background: var(--cream); }
+.menu-section.bg-warm { background: var(--warm); }
+
+.cat-header {
+  position: sticky; top: 0; z-index: 50;
+  padding: 1.2rem 0; margin-bottom: 2.5rem;
+  transition: background .3s, box-shadow .3s;
+}
+.cat-header.stuck {
+  padding: 1rem 0;
+}
+
+/* Dark section sticky headers */
+.bg-dark .cat-header { background: var(--dark-2); }
+.bg-dark .cat-header.stuck { background: rgba(46,29,14,.97); backdrop-filter: blur(10px); box-shadow: 0 4px 20px rgba(0,0,0,.3); }
+
+/* Light section sticky headers */
+.bg-cream .cat-header { background: var(--cream); }
+.bg-cream .cat-header.stuck { background: rgba(253,248,242,.97); backdrop-filter: blur(10px); box-shadow: 0 4px 20px rgba(28,18,8,.08); }
+
+.bg-warm .cat-header { background: var(--warm); }
+.bg-warm .cat-header.stuck { background: rgba(245,237,226,.97); backdrop-filter: blur(10px); box-shadow: 0 4px 20px rgba(28,18,8,.08); }
+
+.cat-title-row {
+  display: flex; align-items: center; gap: 1.5rem;
+}
+.cat-line { flex: 1; height: 1px; background: rgba(176,120,72,.2); }
+.bg-dark .cat-line { background: rgba(212,185,154,.15); }
+
+.cat-title {
+  font-family: var(--f-serif);
+  font-size: clamp(1.4rem,3vw,2rem); font-weight: 300; line-height: 1.2;
+  white-space: nowrap;
+}
+.bg-dark .cat-title { color: var(--inv); }
+.bg-cream .cat-title, .bg-warm .cat-title { color: var(--text); }
+.cat-title em { font-style: italic; color: var(--copper); }
+.bg-dark .cat-title em { color: var(--tan); }
+
+.cat-subtitle {
+  font-size: .62rem; letter-spacing: .35em; text-transform: uppercase; font-weight: 400;
+  white-space: nowrap;
+}
+.bg-dark .cat-subtitle { color: rgba(253,248,242,.35); }
+.bg-cream .cat-subtitle, .bg-warm .cat-subtitle { color: var(--text-3); }
+
+/* ============================================================
+   CATEGORY NAV (sticky below hero)
+   ============================================================ */
+.cat-nav {
+  position: sticky; top: 0; z-index: 90;
+  background: rgba(253,248,242,.95);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(176,120,72,.12);
+  padding: 0;
+  transition: box-shadow .3s;
+}
+.cat-nav.shadow { box-shadow: 0 4px 20px rgba(28,18,8,.08); }
+.cat-nav-inner {
+  max-width: 1280px; margin: 0 auto;
+  padding: 0 clamp(1.25rem,5vw,3rem);
+  display: flex; align-items: center; gap: 0;
+  overflow-x: auto; -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.cat-nav-inner::-webkit-scrollbar { display: none; }
+
+.cat-nav-link {
+  flex-shrink: 0;
+  font-size: .6rem; font-weight: 400; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--text-3); padding: 1rem 1.4rem;
+  border-bottom: 2px solid transparent;
+  transition: color .25s, border-color .25s;
+  cursor: pointer; white-space: nowrap;
+  background: none; border-top: none; border-left: none; border-right: none;
+  font-family: var(--f-sans);
+}
+.cat-nav-link:hover { color: var(--bronze); }
+.cat-nav-link.active {
+  color: var(--bronze);
+  border-bottom-color: var(--copper);
+  font-weight: 500;
+}
+.cat-nav-link:focus-visible { outline: 2px solid var(--bronze); outline-offset: -2px; }
+
+/* ============================================================
+   PRODUCT CARDS (CARTA PAGE)
+   ============================================================ */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  padding-bottom: 3rem;
+}
+
+.p-card {
+  border-radius: 4px; overflow: hidden;
+  transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s;
+  cursor: default;
+}
+/* Dark bg cards */
+.bg-dark .p-card {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(212,185,154,.1);
+}
+.bg-dark .p-card:hover { transform: translateY(-5px); box-shadow: 0 24px 60px rgba(0,0,0,.35); border-color: rgba(201,138,88,.3); }
+
+/* Light bg cards */
+.bg-cream .p-card, .bg-warm .p-card {
+  background: #fff;
+  border: 1px solid rgba(176,120,72,.1);
+  box-shadow: 0 4px 20px rgba(28,18,8,.06);
+}
+.bg-cream .p-card:hover, .bg-warm .p-card:hover { transform: translateY(-5px); box-shadow: 0 24px 60px rgba(28,18,8,.12); border-color: rgba(201,138,88,.3); }
+
+.p-img-wrap { position: relative; overflow: hidden; aspect-ratio: 1/1; }
+.p-img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--ease); }
+.p-card:hover .p-img { transform: scale(1.08); }
+
+.p-badge {
+  position: absolute; top: .6rem; left: .6rem;
+  font-size: .5rem; letter-spacing: .18em; text-transform: uppercase; font-weight: 500;
+  padding: .25rem .7rem; border-radius: 100px;
+  background: var(--copper); color: var(--inv);
+}
+
+.p-body { padding: .8rem; }
+
+.p-name {
+  font-family: var(--f-serif); font-size: .95rem; font-weight: 400;
+  margin-bottom: .25rem; line-height: 1.25;
+}
+.bg-dark .p-name { color: var(--inv); }
+.bg-cream .p-name, .bg-warm .p-name { color: var(--text); }
+
+.p-desc {
+  font-size: .7rem; line-height: 1.6; margin-bottom: .5rem;
+}
+.bg-dark .p-desc { color: rgba(253,248,242,.45); }
+.bg-cream .p-desc, .bg-warm .p-desc { color: var(--text-2); }
+
+.p-ingredients {
+  font-size: .62rem; line-height: 1.5; margin-bottom: .6rem;
+  font-style: italic;
+}
+.bg-dark .p-ingredients { color: rgba(253,248,242,.3); }
+.bg-cream .p-ingredients, .bg-warm .p-ingredients { color: var(--text-3); }
+.p-ingredients strong {
+  font-weight: 400; font-style: normal;
+  text-transform: uppercase; letter-spacing: .12em; font-size: .6rem;
+}
+.bg-dark .p-ingredients strong { color: rgba(253,248,242,.45); }
+.bg-cream .p-ingredients strong, .bg-warm .p-ingredients strong { color: var(--text-2); }
+
+.p-footer { display: flex; align-items: center; justify-content: space-between; gap: .5rem; flex-wrap: wrap; }
+.p-price { font-family: var(--f-serif); font-size: 1.05rem; font-weight: 600; color: var(--tan); }
+.bg-cream .p-price, .bg-warm .p-price { color: var(--copper); }
+
+.allergens { display: flex; flex-wrap: wrap; gap: 4px; }
+
+.chip {
+  font-size: .55rem; letter-spacing: .08em;
+  padding: 3px 8px; border-radius: 100px;
+}
+.bg-dark .chip { border: 1px solid rgba(212,185,154,.18); color: rgba(253,248,242,.4); }
+.bg-dark .chip.ok { border-color: rgba(80,180,120,.25); color: rgba(100,200,140,.7); }
+.bg-cream .chip, .bg-warm .chip { border: 1px solid rgba(176,120,72,.2); color: var(--text-3); }
+.bg-cream .chip.ok, .bg-warm .chip.ok { border-color: rgba(80,180,120,.3); color: rgba(50,140,80,.7); }
+
+/* ============================================================
+   BOTTOM CTA
+   ============================================================ */
+.cta-bottom {
+  background: var(--dark); padding: clamp(3rem,6vw,5rem) 0;
+  text-align: center;
+}
+.cta-bottom .section-title { margin-bottom: 1rem; }
+.cta-bottom p { font-size: .9rem; color: rgba(253,248,242,.45); margin-bottom: 2rem; }
+
+.btn-primary {
+  display: inline-flex; align-items: center; gap: .75rem;
+  background: var(--copper); color: var(--inv);
+  font-size: .7rem; font-weight: 500; letter-spacing: .22em; text-transform: uppercase;
+  padding: 1.1rem 2.5rem; border-radius: 100px; border: none; cursor: pointer;
+  transition: background .25s, transform .25s, box-shadow .25s;
+  position: relative; overflow: hidden;
+}
+.btn-primary::after {
+  content:''; position: absolute; inset: 0;
+  background: rgba(255,255,255,.12); transform: translateX(-100%) skewX(-15deg);
+  transition: transform .4s var(--ease);
+}
+.btn-primary:hover::after { transform: translateX(120%) skewX(-15deg); }
+.btn-primary:hover { background: var(--earth); transform: translateY(-2px); box-shadow: 0 12px 35px rgba(176,120,72,.4); }
+.btn-primary svg { transition: transform .25s; }
+.btn-primary:hover svg { transform: translateX(4px); }
+.btn-primary:focus-visible { outline: 2px solid var(--tan); outline-offset: 3px; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer { background: var(--dark-3); color: var(--inv); padding: clamp(3.5rem,7vw,5rem) 0 0; border-top: 1px solid rgba(212,185,154,.08); }
+.footer-top { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: clamp(2rem,5vw,4rem); padding-bottom: clamp(3rem,5vw,4rem); border-bottom: 1px solid rgba(212,185,154,.08); }
+.f-brand { font-family: var(--f-serif); font-size: 1.3rem; font-weight: 300; line-height: 1.25; color: var(--inv); margin-bottom: .75rem; }
+.f-brand em { font-style: italic; color: var(--tan); }
+.f-tagline { font-family: var(--f-serif); font-style: italic; font-size: .9rem; font-weight: 300; color: rgba(253,248,242,.4); line-height: 1.6; margin-bottom: 1.75rem; }
+.social-row { display: flex; gap: .6rem; }
+.soc { width: 38px; height: 38px; border: 1px solid rgba(212,185,154,.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: rgba(253,248,242,.4); cursor: pointer; transition: all .25s; }
+.soc:hover { background: var(--copper); border-color: var(--copper); color: var(--inv); }
+.soc:focus-visible { outline: 2px solid var(--tan); outline-offset: 2px; }
+.soc svg { width: 15px; height: 15px; }
+.f-col h5 { font-size: .6rem; letter-spacing: .3em; text-transform: uppercase; color: rgba(253,248,242,.25); margin-bottom: 1.25rem; font-weight: 400; }
+.f-col ul { display: flex; flex-direction: column; gap: .65rem; }
+.f-col a { font-size: .85rem; color: rgba(253,248,242,.5); cursor: pointer; transition: color .2s; line-height: 1.5; }
+.f-col a:hover { color: var(--inv); }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; padding: 1.4rem 0; font-size: .7rem; color: rgba(253,248,242,.25); }
+@media (max-width: 768px) { .footer-top { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+/* Scroll top */
+#stb { position: fixed; bottom: 2rem; right: 2rem; z-index: 100; width: 44px; height: 44px; border-radius: 50%; background: var(--copper); color: var(--inv); border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 8px 24px rgba(176,120,72,.35); opacity: 0; transform: translateY(12px); transition: opacity .3s, transform .3s, background .25s; }
+#stb.vis { opacity: 1; transform: none; }
+#stb:hover { background: var(--earth); }
+#stb svg { width: 18px; height: 18px; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1100px) {
+  .products-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 768px) {
+  .products-grid { grid-template-columns: repeat(2, 1fr); }
+  .cat-nav-link { padding: .8rem 1rem; font-size: .55rem; }
+}
+@media (max-width: 480px) {
+  .products-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+  .carta-hero-content { padding: 5rem 1.25rem 2rem; }
+  .p-footer { flex-direction: column; align-items: flex-start; }
+  .p-img-wrap { aspect-ratio: 4/3; }
+}
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip" data-i18n="skip">Ir al contenido</a>
+
+<!-- NAV -->
+<nav id="nav" class="dark-mode" aria-label="Navegacion principal">
+  <a href="index.html" class="nav-logo" aria-label="Patisserie Boulangerie Reiger">
+    <em>Patisserie</em> Boulangerie Reiger
+  </a>
+
+  <div class="nav-links" role="list">
+    <a href="index.html#historia" class="nav-link" role="listitem" data-i18n="nav_historia">Historia</a>
+    <a href="index.html#carta"    class="nav-link" role="listitem" data-i18n="nav_carta">Carta</a>
+    <a href="index.html#galeria"  class="nav-link" role="listitem" data-i18n="nav_galeria">Galeria</a>
+    <a href="index.html#ubicacion" class="nav-link" role="listitem" data-i18n="nav_ubicacion">Ubicacion</a>
+    <a href="index.html#contacto"  class="nav-link" role="listitem" data-i18n="nav_contacto">Contacto</a>
+  </div>
+
+  <!-- FLAGS + hamburger -->
+  <div class="nav-right">
+    <div class="lang-flags" role="group" aria-label="Idioma / Language">
+      <button class="flag-btn active" data-lang="es" aria-pressed="true" aria-label="Espanol">
+        <span class="flag-emoji" aria-hidden="true">&#x1F1EA;&#x1F1F8;</span>
+        <span class="flag-code">ES</span>
+      </button>
+      <button class="flag-btn" data-lang="fr" aria-pressed="false" aria-label="Francais">
+        <span class="flag-emoji" aria-hidden="true">&#x1F1EB;&#x1F1F7;</span>
+        <span class="flag-code">FR</span>
+      </button>
+      <button class="flag-btn" data-lang="en" aria-pressed="false" aria-label="English">
+        <span class="flag-emoji" aria-hidden="true">&#x1F1EC;&#x1F1E7;</span>
+        <span class="flag-code">EN</span>
+      </button>
+      <button class="flag-btn" data-lang="nl" aria-pressed="false" aria-label="Nederlands (Belgie)">
+        <span class="flag-emoji" aria-hidden="true">&#x1F1E7;&#x1F1EA;</span>
+        <span class="flag-code">NL</span>
+      </button>
+    </div>
+    <button class="hamburger" id="ham" aria-expanded="false" aria-controls="mobNav" aria-label="Menu">
+      <span class="h-bar"></span><span class="h-bar"></span><span class="h-bar"></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mob-nav" id="mobNav" role="dialog" aria-modal="true">
+  <button class="mob-close" id="mobClose" aria-label="Cerrar">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+  </button>
+  <a href="index.html" data-i18n="nav_home">Inicio</a>
+  <a href="index.html#historia" data-i18n="nav_historia">Historia</a>
+  <a href="index.html#carta"    data-i18n="nav_carta">Carta</a>
+  <a href="index.html#galeria"  data-i18n="nav_galeria">Galeria</a>
+  <a href="index.html#ubicacion" data-i18n="nav_ubicacion">Ubicacion</a>
+  <a href="index.html#contacto"  data-i18n="nav_contacto">Contacto</a>
+  <div class="mob-lang" role="group" aria-label="Idioma">
+    <button class="mob-flag active" data-lang="es" aria-label="Espanol"><span class="flag-emoji">&#x1F1EA;&#x1F1F8;</span> ES</button>
+    <button class="mob-flag" data-lang="fr" aria-label="Francais"><span class="flag-emoji">&#x1F1EB;&#x1F1F7;</span> FR</button>
+    <button class="mob-flag" data-lang="en" aria-label="English"><span class="flag-emoji">&#x1F1EC;&#x1F1E7;</span> EN</button>
+    <button class="mob-flag" data-lang="nl" aria-label="Nederlands"><span class="flag-emoji">&#x1F1E7;&#x1F1EA;</span> NL</button>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- HERO BANNER -->
+<section id="carta-hero" aria-label="Carta">
+  <div class="carta-hero-bg" aria-hidden="true"></div>
+  <div class="carta-hero-overlay" aria-hidden="true"></div>
+  <div class="carta-hero-content">
+    <span class="carta-hero-tag" data-i18n="carta_hero_tag">Patisserie Boulangerie Reiger</span>
+    <h1 class="carta-hero-title">
+      <em data-i18n="carta_hero_title">Notre Carte</em>
+    </h1>
+    <p class="carta-hero-sub" data-i18n="carta_hero_sub">Elaborado con mantequilla belga AOP cada manana antes del amanecer</p>
+    <a href="index.html" class="back-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      <span data-i18n="back_home">Volver al inicio</span>
+    </a>
+  </div>
+</section>
+
+<!-- CATEGORY NAV -->
+<nav class="cat-nav" id="catNav" aria-label="Categorias">
+  <div class="cat-nav-inner">
+    <button class="cat-nav-link active" data-target="sec-pasteleria" data-i18n="cat_pasteleria">Pasteleria</button>
+    <button class="cat-nav-link" data-target="sec-bolleria" data-i18n="cat_bolleria">Bolleria</button>
+    <button class="cat-nav-link" data-target="sec-pan" data-i18n="cat_pan">Pan</button>
+    <button class="cat-nav-link" data-target="sec-choco" data-i18n="cat_choco">Chocolateria</button>
+    <button class="cat-nav-link" data-target="sec-bebidas" data-i18n="cat_bebidas">Bebidas</button>
+    <button class="cat-nav-link" data-target="sec-cafe" data-i18n="cat_cafe">Cafe</button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════
+     CATEGORY 1: PASTELERIA / PATISSERIE
+     ═══════════════════════════════════════════════════════════ -->
+<section class="menu-section bg-dark" id="sec-pasteleria" aria-label="Pasteleria">
+  <div class="container">
+    <div class="cat-header r">
+      <div class="cat-title-row">
+        <span class="cat-line"></span>
+        <h2 class="cat-title"><em data-i18n="cat_pasteleria">Pasteleria</em></h2>
+        <span class="cat-subtitle" data-i18n="cat_pasteleria_fr">Patisserie</span>
+        <span class="cat-line"></span>
+      </div>
+    </div>
+    <div class="products-grid">
+      <!-- Tarte au Citron -->
+      <article class="p-card r">
+        <div class="p-img-wrap">
+          <img src="https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=600&q=85" alt="Tarte au Citron Meringuee" class="p-img" loading="lazy">
+          <span class="p-badge" data-i18n="badge_signature">Signature</span>
+        </div>
+        <div class="p-body">
+          <h3 class="p-name">Tarte au Citron Meringuee</h3>
+          <p class="p-desc" data-i18n="prod_tarte_desc">Crema de limon siciliano sobre masa sablee belga, cubierta de merengue italiano tostado al momento.</p>
+          <p class="p-ingredients"><strong data-i18n="lbl_ingredients">Ingredientes: </strong><span data-i18n="prod_tarte_ing">Harina de trigo, mantequilla belga AOP, limon siciliano, azucar, huevos, claras de huevo, sal.</span></p>
+          <div class="p-footer">
+            <span class="p-price">4,50 &euro;</span>
+            <div class="allergens">
+              <span class="chip" data-i18n="chip_gluten">Gluten</span>
+              <span class="chip" data-i18n="chip_huevo">Huevo</span>
+              <span class="chip" data-i18n="chip_lacteos">Lacteos</span>
+              <span class="chip ok" data-i18n="chip_nofrutos">Sin frutos secos</span>
+            </div>
+          </div>
+        </div>
+      </article>
+      <!-- Mille-feuille -->
+      <article class="p-card r d1">
+        <div class="p-img-wrap">
+          <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=600&q=85" alt="Mille-feuille a la Vanille" class="p-img" loading="lazy">
+          <span class="p-badge" data-i18n="badge_signature">Signature</span>
+        </div>
+        <div class="p-body">
+          <h3 class="p-name">Mille-feuille a la Vanille</h3>
+          <p class="p-desc" data-i18n="prod_mille_desc">Tres capas de hojaldre caramelizado con crema pastelera de vainilla de Madagascar y glaseado fondant.</p>
+          <p class="p-ingredients"><strong data-i18n="lbl_ingredients">Ingredientes: </strong><span data-i18n="prod_mille_ing">Harina de trigo, mantequilla belga AOP, nata, leche, vainilla de Madagascar, azucar, huevos, azucar glas.</span></p>
+          <div class="p-footer">
+            <span class="p-price">4,80 &euro;</span>
+            <div class="allergens">
+              <span class="chip" data-i18n="chip_gluten">Gluten</span>
+              <span class="chip" data-i18n="chip_huevo">Huevo</span>
+              <span class="chip" data-i18n="chip_lacteos">Lacteos</span>
+              <span class="chip ok" data-i18n="chip_nofrutos">Sin frutos secos</span>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     CATEGORY 2: BOLLERIA / VIENNOISERIE
+     ═══════════════════════════════════════════════════════════ -->
+<section class="menu-section bg-cream" id="sec-bolleria" aria-label="Bolleria">
+  <div class="container">
+    <div class="cat-header r">
+      <div class="cat-title-row">
+        <span class="cat-line"></span>
+        <h2 class="cat-title"><em data-i18n="cat_bolleria">Bolleria</em></h2>
+        <span class="cat-subtitle" data-i18n="cat_bolleria_fr">Viennoiserie</span>
+        <span class="cat-line"></span>
+      </div>
+    </div>
+    <div class="products-grid">
+      <!-- Croissant -->
+      <article class="p-card r">
+        <div class="p-img-wrap">
+          <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=600&q=85" alt="Croissant au Beurre Belge" class="p-img" loading="lazy">
+          <span class="p-badge" data-i18n="badge_artesanal">Artesanal</span>
+        </div>
+        <div class="p-body">
+          <h3 class="p-name">Croissant au Beurre Belge</h3>
+          <p class="p-desc" data-i18n="prod_croissant_desc">27 capas de masa hojaldrada elaboradas a mano con mantequilla AOP belga. Crujiente por fuera, sedoso por dentro.</p>
+          <p class="p-ingredients"><strong data-i18n="lbl_ingredients">Ingredientes: </strong><span data-i18n="prod_croissant_ing">Harina de trigo, mantequilla belga AOP, leche, azucar, levadura, sal.</span></p>
+          <div class="p-footer">
+            <span class="p-price">2,80 &euro;</span>
+            <div class="allergens">
+              <span class="chip" data-i18n="chip_gluten">Gluten</span>
+              <span class="chip" data-i18n="chip_lacteos">Lacteos</span>
+              <span class="chip ok" data-i18n="chip_nofrutos">Sin frutos secos</span>
+            </div>
+          </div>
+        </div>
+      </article>
+      <!-- Pain au Chocolat -->
+      <article class="p-card r d1">
+        <div class="p-img-wrap">
+          <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=85" alt="Pain au Chocolat Praline" class="p-img" loading="lazy">
+          <span class="p-badge" data-i18n="badge_clasico">Clasico</span>
+        </div>
+        <div class="p-body">
+          <h3 class="p-name">Pain au Chocolat Praline</h3>
+          <p class="p-desc" data-i18n="prod_pain_desc">Hojaldre mantequillado con dos barras de chocolate negro belga 70% y corazon de praline de avellanas.</p>
+          <p class="p-ingredients"><strong data-i18n="lbl_ingredients">Ingredientes: </strong><span data-i18n="prod_pain_ing">Harina de trigo, mantequilla belga AOP, chocolate negro 70%, avellanas, azucar, leche, levadura, sal.</span></p>
+          <div class="p-footer">
+            <span class="p-price">3,20 &euro;</span>
+            <div class="allergens">
+              <span class="chip" data-i18n="chip_gluten">Gluten</span>
+              <span class="chip" data-i18n="chip_lacteos">Lacteos</span>
+              <span class="chip" data-i18n="chip_frutos">Frutos secos</span>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     CATEGORY 3: PAN / PAIN
+     ═══════════════════════════════════════════════════════════ -->
+<section class="menu-section bg-warm" id="sec-pan" aria-label="Pan">
+  <div class="container">
+    <div class="cat-header r">
+      <div class="cat-title-row">
+        <span class="cat-line"></span>
+        <h2 class="cat-title"><em data-i18n="cat_pan">Pan</em></h2>
+        <span class="cat-subtitle" data-i18n="cat_pan_fr">Pain</span>
+        <span class="cat-line"></span>
+      </div>
+    </div>
+    <div class="products-grid">
+      <!-- Baguette -->
+      <article class="p-card r">
+        <div class="p-img-wrap">
+          <img src="https://images.unsplash.com/photo-1549931319-a545dcf3bc7b?auto=format&fit=crop&w=600&q=85" alt="Baguette Tradition" class="p-img" loading="lazy">
+          <span class="p-badge" data-i18n="badge_artesanal">Artesanal</span>
+        </div>
+        <div class="p-body">
+          <h3 class="p-name">Baguette Tradition</h3>
+          <p class="p-desc" data-i18n="prod_baguette_desc">Baguette tradicional con corteza crujiente dorada y miga alveolada. Fermentacion lenta de 24 horas.</p>
+          <p class="p-ingredients"><strong data-i18n="lbl_ingredients">Ingredientes: </strong><span data-i18n="prod_baguette_ing">Harina de trigo T65, agua, masa madre, sal, levadura.</span></p>
+          <div class="p-footer">
+            <span class="p-price">2,20 &euro;</span>
+            <div class="allergens">
+              <span class="chip" data-i18n="chip_gluten">Gluten</span>
+              <span class="chip ok" data-i18n="chip_nolacteos">Sin lacteos</span>
+              <span class="chip ok" data-i18n="chip_nofrutos">Sin frutos secos</span>
+            </div>
+          </div>
+        </div>
+      </article>
+      <!-- Pain de Campagne -->
+      <article class="p-card r d1">
+        <div class="p-img-wrap">
+          <img src="https://images.unsplash.com/photo-1574085733277-851d9d856a3a?auto=format&fit=crop&w=600&q=85" alt="Pain de Campagne" class="p-img" loading="lazy">
+          <span class="p-badge" data-i18n="badge_artesanal">Artesanal</span>
+        </div>
+        <div class="p-body">
+          <h3 class="p-name">Pain de Campagne</h3>
+          <p class="p-desc" data-i18n="prod_campagne_desc">Pan de campo con masa madre, corteza rustica y miga densa y humeda. Perfecto para tostar.</p>
+          <p class="p-ingredients"><strong data-i18n="lbl_ingredients">Ingredientes: </strong><span data-i18n="prod_campagne_ing">Harina de trigo T80, harina de centeno, agua, masa madre, sal.</span></p>
+          <div class="p-footer">
+            <span class="p-price">3,60 &euro;</span>
+            <div class="allergens">
+              <span class="chip" data-i18n="chip_gluten">Gluten</span>
+              <span class="chip ok" data-i18n="chip_nolacteos">Sin lacteos</span>
+              <span class="chip ok" data-i18n="chip_nofrutos">Sin frutos secos</span>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     CATEGORY 4: CHOCOLATERIA / CHOCOLATERIE
+     ═══════════════════════════════════════════════════════════ -->
+<section class="menu-section bg-dark" id="sec-choco" aria-label="Chocolateria">
+  <div class="container">
+    <div class="cat-header r">
+      <div class="cat-title-row">
+        <span class="cat-line"></span>
+        <h2 class="cat-title"><em data-i18n="cat_choco">Chocolateria</em></h2>
+        <span class="cat-subtitle" data-i18n="cat_choco_fr">Chocolaterie</span>
+        <span class="cat-line"></span>
+      </div>
+    </div>
+    <div class="products-grid">
+      <!-- Truffes Belges -->
+      <article class="p-card r">
+        <div class="p-img-wrap">
+          <img src="https://images.unsplash.com/photo-1481391319762-47dff72954d9?auto=format&fit=crop&w=600&q=85" alt="Truffes Belges" class="p-img" loading="lazy">
+          <span class="p-badge" data-i18n="badge_signature">Signature</span>
+        </div>
+        <div class="p-body">
+          <h3 class="p-name">Truffes Belges</h3>
+          <p class="p-desc" data-i18n="prod_truffes_desc">Trufas de chocolate negro belga 72% con ganache de nata fresca. Rebozadas en cacao puro. Caja de 6 unidades.</p>
+          <p class="p-ingredients"><strong data-i18n="lbl_ingredients">Ingredientes: </strong><span data-i18n="prod_truffes_ing">Chocolate negro 72%, nata fresca, mantequilla belga AOP, cacao en polvo.</span></p>
+          <div class="p-footer">
+            <span class="p-price">6,50 &euro;</span>
+            <div class="allergens">
+              <span class="chip" data-i18n="chip_lacteos">Lacteos</span>
+              <span class="chip ok" data-i18n="chip_nogluten">Sin gluten</span>
+              <span class="chip ok" data-i18n="chip_nofrutos">Sin frutos secos</span>
+            </div>
+          </div>
+        </div>
+      </article>
+      <!-- Pralines Artisanaux -->
+      <article class="p-card r d1">
+        <div class="p-img-wrap">
+          <img src="https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&w=600&q=85" alt="Pralines Artisanaux" class="p-img" loading="lazy">
+          <span class="p-badge" data-i18n="badge_belga">Belga</span>
+        </div>
+        <div class="p-body">
+          <h3 class="p-name">Pralin&eacute;s Artisanaux</h3>
+          <p class="p-desc" data-i18n="prod_pralines_desc">Seleccion de pralines belgas rellenos de ganache de avellanas, caramelo salado y frambuesa. Caja de 9 unidades.</p>
+          <p class="p-ingredients"><strong data-i18n="lbl_ingredients">Ingredientes: </strong><span data-i18n="prod_pralines_ing">Chocolate con leche belga, avellanas, nata, azucar, mantequilla, frambuesa, sal.</span></p>
+          <div class="p-footer">
+            <span class="p-price">9,80 &euro;</span>
+            <div class="allergens">
+              <span class="chip" data-i18n="chip_lacteos">Lacteos</span>
+              <span class="chip" data-i18n="chip_frutos">Frutos secos</span>
+              <span class="chip ok" data-i18n="chip_nogluten">Sin gluten</span>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     CATEGORY 5: BEBIDAS / BOISSONS
+     ═══════════════════════════════════════════════════════════ -->
+<section class="menu-section bg-cream" id="sec-bebidas" aria-label="Bebidas">
+  <div class="container">
+    <div class="cat-header r">
+      <div class="cat-title-row">
+        <span class="cat-line"></span>
+        <h2 class="cat-title"><em data-i18n="cat_bebidas">Bebidas</em></h2>
+        <span class="cat-subtitle" data-i18n="cat_bebidas_fr">Boissons</span>
+        <span class="cat-line"></span>
+      </div>
+    </div>
+    <div class="products-grid">
+      <!-- Chocolat Chaud -->
+      <article class="p-card r">
+        <div class="p-img-wrap">
+          <img src="https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?auto=format&fit=crop&w=600&q=85" alt="Chocolat Chaud Belge" class="p-img" loading="lazy">
+          <span class="p-badge" data-i18n="badge_signature">Signature</span>
+        </div>
+        <div class="p-body">
+          <h3 class="p-name">Chocolat Chaud Belge</h3>
+          <p class="p-desc" data-i18n="prod_choco_desc">Chocolate caliente espeso elaborado con chocolate belga real fundido en leche fresca. Servido con nata montada.</p>
+          <p class="p-ingredients"><strong data-i18n="lbl_ingredients">Ingredientes: </strong><span data-i18n="prod_choco_ing">Leche fresca entera, chocolate belga 60%, nata montada, azucar de cana.</span></p>
+          <div class="p-footer">
+            <span class="p-price">3,90 &euro;</span>
+            <div class="allergens">
+              <span class="chip" data-i18n="chip_lacteos">Lacteos</span>
+              <span class="chip ok" data-i18n="chip_nogluten">Sin gluten</span>
+              <span class="chip ok" data-i18n="chip_nofrutos">Sin frutos secos</span>
+            </div>
+          </div>
+        </div>
+      </article>
+      <!-- Limonada Belge -->
+      <article class="p-card r d1">
+        <div class="p-img-wrap">
+          <img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=600&q=85" alt="Limonada Artesanal" class="p-img" loading="lazy">
+          <span class="p-badge" data-i18n="badge_artesanal">Artesanal</span>
+        </div>
+        <div class="p-body">
+          <h3 class="p-name">Limonade Artisanale</h3>
+          <p class="p-desc" data-i18n="prod_limonada_desc">Limonada fresca elaborada con limon siciliano exprimido al momento, agua con gas y un toque de lavanda.</p>
+          <p class="p-ingredients"><strong data-i18n="lbl_ingredients">Ingredientes: </strong><span data-i18n="prod_limonada_ing">Limon siciliano, agua mineral con gas, azucar de cana, lavanda natural.</span></p>
+          <div class="p-footer">
+            <span class="p-price">2,80 &euro;</span>
+            <div class="allergens">
+              <span class="chip ok" data-i18n="chip_nogluten">Sin gluten</span>
+              <span class="chip ok" data-i18n="chip_nolacteos">Sin lacteos</span>
+              <span class="chip ok" data-i18n="chip_nofrutos">Sin frutos secos</span>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     CATEGORY 6: CAFE / CAFE
+     ═══════════════════════════════════════════════════════════ -->
+<section class="menu-section bg-warm" id="sec-cafe" aria-label="Cafe">
+  <div class="container">
+    <div class="cat-header r">
+      <div class="cat-title-row">
+        <span class="cat-line"></span>
+        <h2 class="cat-title"><em data-i18n="cat_cafe">Cafe</em></h2>
+        <span class="cat-subtitle" data-i18n="cat_cafe_fr">Cafe</span>
+        <span class="cat-line"></span>
+      </div>
+    </div>
+    <div class="products-grid">
+      <!-- Espresso -->
+      <article class="p-card r">
+        <div class="p-img-wrap">
+          <img src="https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?auto=format&fit=crop&w=600&q=85" alt="Espresso Belga" class="p-img" loading="lazy">
+          <span class="p-badge" data-i18n="badge_clasico">Clasico</span>
+        </div>
+        <div class="p-body">
+          <h3 class="p-name">Espresso Belga</h3>
+          <p class="p-desc" data-i18n="prod_espresso_desc">Espresso de mezcla belga con notas de chocolate y frutos secos. Servido en taza calentada.</p>
+          <p class="p-ingredients"><strong data-i18n="lbl_ingredients">Ingredientes: </strong><span data-i18n="prod_espresso_ing">Cafe de origen belgica, agua filtrada.</span></p>
+          <div class="p-footer">
+            <span class="p-price">1,80 &euro;</span>
+            <div class="allergens">
+              <span class="chip ok" data-i18n="chip_nogluten">Sin gluten</span>
+              <span class="chip ok" data-i18n="chip_nolacteos">Sin lacteos</span>
+            </div>
+          </div>
+        </div>
+      </article>
+      <!-- Cafe au Lait -->
+      <article class="p-card r d1">
+        <div class="p-img-wrap">
+          <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=600&q=85" alt="Cafe au Lait" class="p-img" loading="lazy">
+          <span class="p-badge" data-i18n="badge_signature">Signature</span>
+        </div>
+        <div class="p-body">
+          <h3 class="p-name">Caf&eacute; au Lait</h3>
+          <p class="p-desc" data-i18n="prod_cafelait_desc">Cafe con leche al estilo belga: espresso doble con leche entera vaporizada y una fina capa de espuma sedosa.</p>
+          <p class="p-ingredients"><strong data-i18n="lbl_ingredients">Ingredientes: </strong><span data-i18n="prod_cafelait_ing">Cafe de origen belgica, leche entera fresca.</span></p>
+          <div class="p-footer">
+            <span class="p-price">2,60 &euro;</span>
+            <div class="allergens">
+              <span class="chip" data-i18n="chip_lacteos">Lacteos</span>
+              <span class="chip ok" data-i18n="chip_nogluten">Sin gluten</span>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- BOTTOM CTA -->
+<section class="cta-bottom">
+  <div class="container">
+    <span class="eyebrow light r" data-i18n="cta_eyebrow">Reservations &amp; Contact</span>
+    <h2 class="section-title light r d1" data-i18n="cta_title">Un pedido <em>especial?</em></h2>
+    <p class="r d2" data-i18n="cta_sub">Contactenos para pedidos personalizados, tartas de celebracion o eventos privados.</p>
+    <a href="index.html#contacto" class="btn-primary r d3">
+      <span data-i18n="cta_btn">Contactar</span>
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <p class="f-brand"><em>Patisserie</em><br>Boulangerie Reiger</p>
+        <p class="f-tagline" data-i18n="footer_tagline">L'art de la patisserie belge,<br>au coeur de la Costa Blanca.</p>
+        <nav class="social-row" aria-label="Redes sociales">
+          <a href="#" class="soc" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="#" class="soc" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="#" class="soc" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg></a>
+        </nav>
+      </div>
+      <nav class="f-col" aria-label="Navegacion footer">
+        <h5 data-i18n="footer_nav_titulo">Navegacion</h5>
+        <ul>
+          <li><a href="index.html" data-i18n="nav_home">Inicio</a></li>
+          <li><a href="index.html#historia" data-i18n="nav_historia">Historia</a></li>
+          <li><a href="index.html#carta"    data-i18n="nav_carta">Carta</a></li>
+          <li><a href="index.html#galeria"  data-i18n="nav_galeria">Galeria</a></li>
+          <li><a href="index.html#contacto"  data-i18n="nav_contacto">Contacto</a></li>
+        </ul>
+      </nav>
+      <address class="f-col" style="font-style:normal">
+        <h5 data-i18n="footer_contact_titulo">Contacto</h5>
+        <ul>
+          <li><a href="tel:+34965000123">+34 965 000 123</a></li>
+          <li><a href="mailto:bonjour@patisserie-reiger.es">bonjour@patisserie-reiger.es</a></li>
+          <li><a href="https://maps.google.com/?q=Carrer+de+Juan+de+la+Cierva+46+El+Campello" target="_blank" rel="noopener">Carrer de Juan de la Cierva, 46<br>El Campello, Alicante</a></li>
+        </ul>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span data-i18n="footer_copy">&copy; 2025 Patisserie Boulangerie Reiger. Todos los derechos reservados.</span>
+      <span data-i18n="footer_craft">Artisanat belge &middot; El Campello</span>
+    </div>
+  </div>
+</footer>
+
+<button id="stb" aria-label="Volver arriba">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 15l-6-6-6 6"/></svg>
+</button>
+
+<script>
+/* ============================================================
+   TRANSLATIONS
+   ============================================================ */
+const T = {
+  es: {
+    skip:'Ir al contenido',
+    nav_home:'Inicio',
+    nav_historia:'Historia', nav_carta:'Carta', nav_galeria:'Galeria',
+    nav_ubicacion:'Ubicacion', nav_contacto:'Contacto',
+    carta_hero_tag:'Patisserie Boulangerie Reiger',
+    carta_hero_title:'Nuestra Carta',
+    carta_hero_sub:'Elaborado con mantequilla belga AOP cada manana antes del amanecer',
+    back_home:'Volver al inicio',
+    cat_pasteleria:'Pasteleria', cat_pasteleria_fr:'Patisserie',
+    cat_bolleria:'Bolleria', cat_bolleria_fr:'Viennoiserie',
+    cat_pan:'Pan', cat_pan_fr:'Pain',
+    cat_choco:'Chocolateria', cat_choco_fr:'Chocolaterie',
+    cat_bebidas:'Bebidas', cat_bebidas_fr:'Boissons',
+    cat_cafe:'Cafe', cat_cafe_fr:'Cafe',
+    badge_signature:'Signature', badge_artesanal:'Artesanal', badge_clasico:'Clasico', badge_belga:'Belga',
+    lbl_ingredients:'Ingredientes: ',
+    prod_tarte_desc:'Crema de limon siciliano sobre masa sablee belga, cubierta de merengue italiano tostado al momento.',
+    prod_tarte_ing:'Harina de trigo, mantequilla belga AOP, limon siciliano, azucar, huevos, claras de huevo, sal.',
+    prod_mille_desc:'Tres capas de hojaldre caramelizado con crema pastelera de vainilla de Madagascar y glaseado fondant.',
+    prod_mille_ing:'Harina de trigo, mantequilla belga AOP, nata, leche, vainilla de Madagascar, azucar, huevos, azucar glas.',
+    prod_croissant_desc:'27 capas de masa hojaldrada elaboradas a mano con mantequilla AOP belga. Crujiente por fuera, sedoso por dentro.',
+    prod_croissant_ing:'Harina de trigo, mantequilla belga AOP, leche, azucar, levadura, sal.',
+    prod_pain_desc:'Hojaldre mantequillado con dos barras de chocolate negro belga 70% y corazon de praline de avellanas.',
+    prod_pain_ing:'Harina de trigo, mantequilla belga AOP, chocolate negro 70%, avellanas, azucar, leche, levadura, sal.',
+    prod_baguette_desc:'Baguette tradicional con corteza crujiente dorada y miga alveolada. Fermentacion lenta de 24 horas.',
+    prod_baguette_ing:'Harina de trigo T65, agua, masa madre, sal, levadura.',
+    prod_campagne_desc:'Pan de campo con masa madre, corteza rustica y miga densa y humeda. Perfecto para tostar.',
+    prod_campagne_ing:'Harina de trigo T80, harina de centeno, agua, masa madre, sal.',
+    prod_truffes_desc:'Trufas de chocolate negro belga 72% con ganache de nata fresca. Rebozadas en cacao puro. Caja de 6 unidades.',
+    prod_truffes_ing:'Chocolate negro 72%, nata fresca, mantequilla belga AOP, cacao en polvo.',
+    prod_pralines_desc:'Seleccion de pralines belgas rellenos de ganache de avellanas, caramelo salado y frambuesa. Caja de 9 unidades.',
+    prod_pralines_ing:'Chocolate con leche belga, avellanas, nata, azucar, mantequilla, frambuesa, sal.',
+    prod_choco_desc:'Chocolate caliente espeso elaborado con chocolate belga real fundido en leche fresca. Servido con nata montada.',
+    prod_choco_ing:'Leche fresca entera, chocolate belga 60%, nata montada, azucar de cana.',
+    prod_limonada_desc:'Limonada fresca elaborada con limon siciliano exprimido al momento, agua con gas y un toque de lavanda.',
+    prod_limonada_ing:'Limon siciliano, agua mineral con gas, azucar de cana, lavanda natural.',
+    prod_espresso_desc:'Espresso de mezcla belga con notas de chocolate y frutos secos. Servido en taza calentada.',
+    prod_espresso_ing:'Cafe de origen belgica, agua filtrada.',
+    prod_cafelait_desc:'Cafe con leche al estilo belga: espresso doble con leche entera vaporizada y una fina capa de espuma sedosa.',
+    prod_cafelait_ing:'Cafe de origen belgica, leche entera fresca.',
+    chip_gluten:'Gluten', chip_huevo:'Huevo', chip_lacteos:'Lacteos',
+    chip_nofrutos:'Sin frutos secos', chip_frutos:'Frutos secos',
+    chip_nolacteos:'Sin lacteos', chip_nogluten:'Sin gluten',
+    choco_coming:'Nuevas creaciones de chocolate belga llegaran pronto.',
+    cafe_coming:'Nuestra carta de cafes de especialidad estara disponible proximamente.',
+    cta_eyebrow:'Reservas & Contacto',
+    cta_title:'Un pedido <em>especial?</em>',
+    cta_sub:'Contactenos para pedidos personalizados, tartas de celebracion o eventos privados.',
+    cta_btn:'Contactar',
+    footer_tagline:"L'art de la patisserie belge,\nau coeur de la Costa Blanca.",
+    footer_nav_titulo:'Navegacion', footer_contact_titulo:'Contacto',
+    footer_copy:'\u00a9 2025 Patisserie Boulangerie Reiger. Todos los derechos reservados.',
+    footer_craft:'Artisanat belge \u00b7 El Campello',
+  },
+  fr: {
+    skip:'Aller au contenu',
+    nav_home:'Accueil',
+    nav_historia:'Histoire', nav_carta:'Carte', nav_galeria:'Galerie',
+    nav_ubicacion:'Localisation', nav_contacto:'Contact',
+    carta_hero_tag:'Patisserie Boulangerie Reiger',
+    carta_hero_title:'Notre Carte',
+    carta_hero_sub:"Prepare avec du beurre belge AOP chaque matin avant l'aube",
+    back_home:"Retour a l'accueil",
+    cat_pasteleria:'Patisserie', cat_pasteleria_fr:'Patisserie',
+    cat_bolleria:'Viennoiserie', cat_bolleria_fr:'Viennoiserie',
+    cat_pan:'Pain', cat_pan_fr:'Pain',
+    cat_choco:'Chocolaterie', cat_choco_fr:'Chocolaterie',
+    cat_bebidas:'Boissons', cat_bebidas_fr:'Boissons',
+    cat_cafe:'Cafe', cat_cafe_fr:'Cafe',
+    badge_signature:'Signature', badge_artesanal:'Artisanal', badge_clasico:'Classique', badge_belga:'Belge',
+    lbl_ingredients:'Ingredients : ',
+    prod_tarte_desc:"Creme de citron sicilien sur pate sablee belge, couverte de meringue italienne flambee a la commande.",
+    prod_tarte_ing:"Farine de ble, beurre belge AOP, citron sicilien, sucre, oeufs, blancs d'oeufs, sel.",
+    prod_mille_desc:"Trois couches de feuilletage caramelise avec creme patissiere a la vanille de Madagascar et glacage fondant.",
+    prod_mille_ing:"Farine de ble, beurre belge AOP, creme, lait, vanille de Madagascar, sucre, oeufs, sucre glace.",
+    prod_croissant_desc:"27 couches de pate feuilletee faites a la main avec du beurre AOP belge. Croustillant dehors, soyeux dedans.",
+    prod_croissant_ing:"Farine de ble, beurre belge AOP, lait, sucre, levure, sel.",
+    prod_pain_desc:"Feuilletage beurre avec deux barres de chocolat noir belge 70% et coeur de praline aux noisettes.",
+    prod_pain_ing:"Farine de ble, beurre belge AOP, chocolat noir 70%, noisettes, sucre, lait, levure, sel.",
+    prod_baguette_desc:"Baguette tradition a la croute doree croustillante et mie alveolee. Fermentation lente de 24 heures.",
+    prod_baguette_ing:"Farine de ble T65, eau, levain, sel, levure.",
+    prod_campagne_desc:"Pain de campagne au levain naturel, croute rustique et mie dense et moelleuse. Ideal pour le toast.",
+    prod_campagne_ing:"Farine de ble T80, farine de seigle, eau, levain, sel.",
+    prod_truffes_desc:"Truffes en chocolat noir belge 72% avec ganache a la creme fraiche. Roulees dans du cacao pur. Boite de 6.",
+    prod_truffes_ing:"Chocolat noir 72%, creme fraiche, beurre belge AOP, cacao en poudre.",
+    prod_pralines_desc:"Selection de pralines belges fourres ganache noisette, caramel sale et framboise. Boite de 9.",
+    prod_pralines_ing:"Chocolat au lait belge, noisettes, creme, sucre, beurre, framboise, sel.",
+    prod_choco_desc:"Chocolat chaud onctueux elabore avec du vrai chocolat belge fondu dans du lait frais. Servi avec chantilly.",
+    prod_choco_ing:"Lait frais entier, chocolat belge 60%, chantilly, sucre de canne.",
+    prod_limonada_desc:"Limonade fraiche au citron sicilien presse sur le moment, eau petillante et une touche de lavande.",
+    prod_limonada_ing:"Citron sicilien, eau minerale gazeuse, sucre de canne, lavande naturelle.",
+    prod_espresso_desc:"Espresso de melange belge aux notes de chocolat et fruits secs. Servi dans une tasse prechauffee.",
+    prod_espresso_ing:"Cafe d'origine belge, eau filtree.",
+    prod_cafelait_desc:"Cafe au lait a la belge: double espresso avec lait entier vaporise et une fine couche de mousse soyeuse.",
+    prod_cafelait_ing:"Cafe d'origine belge, lait entier frais.",
+    chip_gluten:'Gluten', chip_huevo:'Oeuf', chip_lacteos:'Laitiers',
+    chip_nofrutos:'Sans fruits a coque', chip_frutos:'Fruits a coque',
+    chip_nolacteos:'Sans laitiers', chip_nogluten:'Sans gluten',
+    choco_coming:'De nouvelles creations en chocolat belge arrivent bientot.',
+    cafe_coming:'Notre carte de cafes de specialite sera bientot disponible.',
+    cta_eyebrow:'Reservations & Contact',
+    cta_title:'Une commande <em>speciale?</em>',
+    cta_sub:'Contactez-nous pour des commandes personnalisees, gateaux de fete ou evenements prives.',
+    cta_btn:'Nous contacter',
+    footer_tagline:"L'art de la patisserie belge,\nau coeur de la Costa Blanca.",
+    footer_nav_titulo:'Navigation', footer_contact_titulo:'Contact',
+    footer_copy:'\u00a9 2025 Patisserie Boulangerie Reiger. Tous droits reserves.',
+    footer_craft:'Artisanat belge \u00b7 El Campello',
+  },
+  en: {
+    skip:'Skip to content',
+    nav_home:'Home',
+    nav_historia:'History', nav_carta:'Menu', nav_galeria:'Gallery',
+    nav_ubicacion:'Location', nav_contacto:'Contact',
+    carta_hero_tag:'Patisserie Boulangerie Reiger',
+    carta_hero_title:'Our Menu',
+    carta_hero_sub:'Made with Belgian AOP butter every morning before dawn',
+    back_home:'Back to home',
+    cat_pasteleria:'Pastry', cat_pasteleria_fr:'Patisserie',
+    cat_bolleria:'Viennoiserie', cat_bolleria_fr:'Viennoiserie',
+    cat_pan:'Bread', cat_pan_fr:'Pain',
+    cat_choco:'Chocolaterie', cat_choco_fr:'Chocolaterie',
+    cat_bebidas:'Beverages', cat_bebidas_fr:'Boissons',
+    cat_cafe:'Coffee', cat_cafe_fr:'Cafe',
+    badge_signature:'Signature', badge_artesanal:'Artisan', badge_clasico:'Classic', badge_belga:'Belgian',
+    lbl_ingredients:'Ingredients: ',
+    prod_tarte_desc:'Sicilian lemon cream on Belgian sablee pastry, topped with Italian meringue toasted to order.',
+    prod_tarte_ing:'Wheat flour, Belgian AOP butter, Sicilian lemon, sugar, eggs, egg whites, salt.',
+    prod_mille_desc:'Three layers of caramelised puff pastry with Madagascar vanilla custard cream and fondant icing.',
+    prod_mille_ing:'Wheat flour, Belgian AOP butter, cream, milk, Madagascar vanilla, sugar, eggs, icing sugar.',
+    prod_croissant_desc:'27 layers of hand-rolled flaky dough with Belgian AOP butter. Crispy outside, silky inside.',
+    prod_croissant_ing:'Wheat flour, Belgian AOP butter, milk, sugar, yeast, salt.',
+    prod_pain_desc:'Buttery pastry with two bars of 70% Belgian dark chocolate and a hazelnut praline heart.',
+    prod_pain_ing:'Wheat flour, Belgian AOP butter, 70% dark chocolate, hazelnuts, sugar, milk, yeast, salt.',
+    prod_baguette_desc:'Traditional baguette with golden crispy crust and open-crumb interior. 24-hour slow fermentation.',
+    prod_baguette_ing:'T65 wheat flour, water, sourdough, salt, yeast.',
+    prod_campagne_desc:'Country sourdough bread with rustic crust and dense, moist crumb. Perfect for toasting.',
+    prod_campagne_ing:'T80 wheat flour, rye flour, water, sourdough starter, salt.',
+    prod_truffes_desc:'Belgian 72% dark chocolate truffles with fresh cream ganache. Rolled in pure cocoa powder. Box of 6.',
+    prod_truffes_ing:'72% dark chocolate, fresh cream, Belgian AOP butter, cocoa powder.',
+    prod_pralines_desc:'Selection of Belgian pralines filled with hazelnut ganache, salted caramel and raspberry. Box of 9.',
+    prod_pralines_ing:'Belgian milk chocolate, hazelnuts, cream, sugar, butter, raspberry, salt.',
+    prod_choco_desc:'Rich hot chocolate made with real Belgian chocolate melted in fresh milk. Served with whipped cream.',
+    prod_choco_ing:'Fresh whole milk, 60% Belgian chocolate, whipped cream, cane sugar.',
+    prod_limonada_desc:'Fresh lemonade made with Sicilian lemon squeezed to order, sparkling water and a hint of lavender.',
+    prod_limonada_ing:'Sicilian lemon, sparkling mineral water, cane sugar, natural lavender.',
+    prod_espresso_desc:'Belgian blend espresso with notes of chocolate and dried fruit. Served in a pre-warmed cup.',
+    prod_espresso_ing:'Belgian origin coffee, filtered water.',
+    prod_cafelait_desc:'Belgian-style cafe au lait: double espresso with steamed whole milk and a fine silky foam layer.',
+    prod_cafelait_ing:'Belgian origin coffee, fresh whole milk.',
+    chip_gluten:'Gluten', chip_huevo:'Egg', chip_lacteos:'Dairy',
+    chip_nofrutos:'No tree nuts', chip_frutos:'Tree nuts',
+    chip_nolacteos:'Dairy free', chip_nogluten:'Gluten free',
+    choco_coming:'New Belgian chocolate creations coming soon.',
+    cafe_coming:'Our specialty coffee menu will be available soon.',
+    cta_eyebrow:'Reservations & Contact',
+    cta_title:'A <em>special</em> order?',
+    cta_sub:'Contact us for custom orders, celebration cakes or private events.',
+    cta_btn:'Get in touch',
+    footer_tagline:"The art of Belgian pastry,\nat the heart of the Costa Blanca.",
+    footer_nav_titulo:'Navigation', footer_contact_titulo:'Contact',
+    footer_copy:'\u00a9 2025 Patisserie Boulangerie Reiger. All rights reserved.',
+    footer_craft:'Belgian craftsmanship \u00b7 El Campello',
+  },
+  nl: {
+    skip:'Naar inhoud',
+    nav_home:'Home',
+    nav_historia:'Geschiedenis', nav_carta:'Kaart', nav_galeria:'Galerij',
+    nav_ubicacion:'Locatie', nav_contacto:'Contact',
+    carta_hero_tag:'Patisserie Boulangerie Reiger',
+    carta_hero_title:'Onze Kaart',
+    carta_hero_sub:'Elke ochtend bereid met Belgische AOP boter voor het aanbreken van de dag',
+    back_home:'Terug naar home',
+    cat_pasteleria:'Patisserie', cat_pasteleria_fr:'Patisserie',
+    cat_bolleria:'Viennoiserie', cat_bolleria_fr:'Viennoiserie',
+    cat_pan:'Brood', cat_pan_fr:'Pain',
+    cat_choco:'Chocolaterie', cat_choco_fr:'Chocolaterie',
+    cat_bebidas:'Dranken', cat_bebidas_fr:'Boissons',
+    cat_cafe:'Koffie', cat_cafe_fr:'Cafe',
+    badge_signature:'Signature', badge_artesanal:'Ambachtelijk', badge_clasico:'Klassiek', badge_belga:'Belgisch',
+    lbl_ingredients:'Ingredienten: ',
+    prod_tarte_desc:'Siciliaanse citroencrème op Belgisch sablee-deeg, bedekt met Italiaanse meringue direct gebrand.',
+    prod_tarte_ing:'Tarwebloem, Belgische AOP boter, Siciliaanse citroen, suiker, eieren, eiwitten, zout.',
+    prod_mille_desc:'Drie lagen gekarameliseerd bladerdeeg met banketbakkersroom van Madagaskar-vanille en fondantglazuur.',
+    prod_mille_ing:'Tarwebloem, Belgische AOP boter, room, melk, Madagaskar-vanille, suiker, eieren, poedersuiker.',
+    prod_croissant_desc:'27 lagen met de hand gerold bladerdeeg met Belgische AOP boter. Krokant vanbuiten, zijdezacht vanbinnen.',
+    prod_croissant_ing:'Tarwebloem, Belgische AOP boter, melk, suiker, gist, zout.',
+    prod_pain_desc:'Boterdeeg met twee repen 70% Belgische pure chocolade en een hart van hazelnootpraline.',
+    prod_pain_ing:'Tarwebloem, Belgische AOP boter, pure chocolade 70%, hazelnoten, suiker, melk, gist, zout.',
+    prod_baguette_desc:'Traditionele baguette met goudbruin krokant korstje en luchtige kruim. 24 uur langzaam gerezen.',
+    prod_baguette_ing:'T65 tarwebloem, water, desem, zout, gist.',
+    prod_campagne_desc:'Boerenbrood met desem, rustieke korst en dichte, vochtige kruim. Ideaal om te roosteren.',
+    prod_campagne_ing:'T80 tarwebloem, roggemeel, water, desemstarter, zout.',
+    prod_truffes_desc:'Belgische truffels van 72% pure chocolade met ganache van verse room. Gerold in puur cacaopoeder. Doos van 6.',
+    prod_truffes_ing:'Pure chocolade 72%, verse room, Belgische AOP boter, cacaopoeder.',
+    prod_pralines_desc:'Selectie Belgische pralines gevuld met hazelnootganache, gezouten karamel en framboos. Doos van 9.',
+    prod_pralines_ing:'Belgische melkchocolade, hazelnoten, room, suiker, boter, framboos, zout.',
+    prod_choco_desc:'Romige warme chocolademelk gemaakt van echte Belgische chocolade gesmolten in verse melk. Geserveerd met slagroom.',
+    prod_choco_ing:'Verse volle melk, Belgische chocolade 60%, slagroom, rietsuiker.',
+    prod_limonada_desc:'Verse limonade van Siciliaanse citroen geperst op bestelling, bruisend water en een vleugje lavendel.',
+    prod_limonada_ing:'Siciliaanse citroen, bruisend mineraalwater, rietsuiker, natuurlijke lavendel.',
+    prod_espresso_desc:'Belgische espresso met tonen van chocolade en gedroogd fruit. Geserveerd in een voorverwarmd kopje.',
+    prod_espresso_ing:'Koffie van Belgische origine, gefilterd water.',
+    prod_cafelait_desc:'Cafe au lait op Belgische wijze: dubbele espresso met gestoomde volle melk en een fijne zijdeachtige schuimlaag.',
+    prod_cafelait_ing:'Koffie van Belgische origine, verse volle melk.',
+    chip_gluten:'Gluten', chip_huevo:'Ei', chip_lacteos:'Zuivel',
+    chip_nofrutos:'Zonder noten', chip_frutos:'Noten',
+    chip_nolacteos:'Zonder zuivel', chip_nogluten:'Glutenvrij',
+    choco_coming:'Nieuwe Belgische chocoladecreaties komen binnenkort.',
+    cafe_coming:'Ons menu met speciale koffies is binnenkort beschikbaar.',
+    cta_eyebrow:'Reserveringen & Contact',
+    cta_title:'Een <em>speciale</em> bestelling?',
+    cta_sub:'Neem contact met ons op voor speciale bestellingen, feesttaarten of prive-evenementen.',
+    cta_btn:'Contact opnemen',
+    footer_tagline:"De kunst van Belgisch gebak,\nin het hart van de Costa Blanca.",
+    footer_nav_titulo:'Navigatie', footer_contact_titulo:'Contact',
+    footer_copy:'\u00a9 2025 Patisserie Boulangerie Reiger. Alle rechten voorbehouden.',
+    footer_craft:'Belgisch vakmanschap \u00b7 El Campello',
+  }
+};
+
+/* ── setLang ── */
+let currentLang = 'es';
+
+function setLang(lang) {
+  if (!T[lang]) return;
+  currentLang = lang;
+  document.documentElement.lang = lang;
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (T[lang][key] !== undefined) {
+      el.innerHTML = T[lang][key];
+    }
+  });
+
+  document.querySelectorAll('.flag-btn, .mob-flag').forEach(btn => {
+    const active = btn.dataset.lang === lang;
+    btn.classList.toggle('active', active);
+    btn.setAttribute('aria-pressed', String(active));
+  });
+}
+
+/* ── Nav scroll ── */
+const nav = document.getElementById('nav');
+const stb = document.getElementById('stb');
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  nav.classList.toggle('scrolled', y > 60);
+  stb.classList.toggle('vis', y > 500);
+}, { passive: true });
+stb.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+/* ── Mobile nav ── */
+const ham  = document.getElementById('ham');
+const mob  = document.getElementById('mobNav');
+const mobC = document.getElementById('mobClose');
+const openNav  = () => { mob.classList.add('open');  ham.setAttribute('aria-expanded','true');  document.body.style.overflow='hidden'; };
+const closeNav = () => { mob.classList.remove('open'); ham.setAttribute('aria-expanded','false'); document.body.style.overflow=''; };
+ham.addEventListener('click', openNav);
+mobC.addEventListener('click', closeNav);
+mob.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
+document.addEventListener('keydown', e => { if (e.key==='Escape') closeNav(); });
+
+/* ── Flag buttons (nav + mob) ── */
+document.querySelectorAll('.flag-btn, .mob-flag').forEach(btn => {
+  btn.addEventListener('click', () => {
+    setLang(btn.dataset.lang);
+    closeNav();
+  });
+});
+
+/* ── Reveal (IntersectionObserver) ── */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.r').forEach(el => io.observe(el));
+
+/* ── Sticky header detection ── */
+const catHeaders = document.querySelectorAll('.cat-header');
+const stickyObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    e.target.classList.toggle('stuck', !e.isIntersecting);
+  });
+}, { threshold: [1], rootMargin: '-1px 0px 0px 0px' });
+catHeaders.forEach(h => stickyObs.observe(h));
+
+/* ── Hero parallax ── */
+const heroBg = document.querySelector('.carta-hero-bg');
+if (heroBg) {
+  window.addEventListener('scroll', () => {
+    if (window.scrollY < window.innerHeight)
+      heroBg.style.transform = 'scale(1.05) translateY(' + (window.scrollY * 0.1) + 'px)';
+  }, { passive: true });
+}
+
+/* ── Category Nav: click to scroll ── */
+const catNavLinks = document.querySelectorAll('.cat-nav-link');
+catNavLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    const target = document.getElementById(link.dataset.target);
+    if (target) {
+      const catNavH = document.getElementById('catNav').offsetHeight;
+      const y = target.getBoundingClientRect().top + window.scrollY - catNavH - 4;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  });
+});
+
+/* ── Category Nav: scroll spy ── */
+const catSections = document.querySelectorAll('.menu-section[id]');
+const catNavEl = document.getElementById('catNav');
+const spyObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      catNavLinks.forEach(l => l.classList.toggle('active', l.dataset.target === e.target.id));
+      // scroll active link into view in the nav
+      const active = catNavEl.querySelector('.cat-nav-link.active');
+      if (active) active.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+  });
+}, { threshold: 0.15, rootMargin: '-20% 0px -60% 0px' });
+catSections.forEach(s => spyObs.observe(s));
+
+/* ── Category Nav: shadow on scroll ── */
+window.addEventListener('scroll', () => {
+  if (catNavEl) catNavEl.classList.toggle('shadow', window.scrollY > 300);
+}, { passive: true });
+
+/* ── Init ES ── */
+setLang('es');
+</script>
+</body>
+</html>
