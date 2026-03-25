@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pâtisserie Boulangerie Reiger — El Campello</title>
+  <meta name="description" content="Artesanía belga desde 1897. Croissants, tartas y bollería elaborados cada mañana en El Campello, Alicante.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root {
+  --cream:    #fdf8f2;
+  --warm:     #f5ede2;
+  --blush:    #eeddd0;
+  --tan:      #d4b99a;
+  --bronze:   #b07848;
+  --copper:   #c98a58;
+  --earth:    #8b5e38;
+  --dark:     #1c1208;
+  --dark-2:   #2e1d0e;
+  --dark-3:   #3d2a18;
+  --text:     #1c1208;
+  --text-2:   #5a3d28;
+  --text-3:   #9a7a60;
+  --inv:      #fdf8f2;
+  --f-serif:  'Cormorant Garamond', Georgia, serif;
+  --f-sans:   'DM Sans', system-ui, sans-serif;
+  --ease:     cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ============================================================
+   RESET
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { background: var(--cream); color: var(--text); font-family: var(--f-sans); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+button, input, textarea, select { font: inherit; }
+
+/* ============================================================
+   SKIP LINK
+   ============================================================ */
+.skip { position: absolute; top: -200%; left: 1rem; background: var(--bronze); color: var(--inv); padding: .5rem 1rem; z-index: 9999; transition: top .2s; }
+.skip:focus { top: 1rem; }
+
+/* ============================================================
+   NAVBAR
+   ============================================================ */
+#nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  padding: 1.4rem 2.5rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+  transition: padding .4s var(--ease), background .4s, border-color .4s;
+  border-bottom: 1px solid transparent;
+}
+#nav.scrolled {
+  background: rgba(253,248,242,.93);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  padding: .9rem 2.5rem;
+  border-color: rgba(176,120,72,.15);
+}
+#nav.dark-mode { color: var(--inv); }
+#nav.dark-mode .nav-link { color: rgba(253,248,242,.75); }
+#nav.dark-mode .nav-link:hover { color: var(--inv); }
+#nav.dark-mode.scrolled { color: var(--text); }
+#nav.dark-mode.scrolled .nav-link { color: var(--text-2); }
+#nav.dark-mode.scrolled .nav-link:hover { color: var(--bronze); }
+#nav.dark-mode.scrolled .flag-btn { border-color: rgba(176,120,72,.2); }
+#nav.dark-mode.scrolled .flag-btn:hover,
+#nav.dark-mode.scrolled .flag-btn.active { border-color: var(--copper); }
+
+.nav-logo {
+  font-family: var(--f-serif);
+  font-size: .95rem; font-weight: 400; letter-spacing: .06em;
+  white-space: nowrap; flex-shrink: 0;
+}
+.nav-logo em { font-style: italic; color: var(--copper); }
+#nav.dark-mode .nav-logo em { color: var(--tan); }
+#nav.dark-mode.scrolled .nav-logo em { color: var(--copper); }
+
+.nav-links { display: flex; gap: 2rem; }
+.nav-link {
+  font-size: .68rem; font-weight: 400; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--text-2); transition: color .25s; cursor: pointer;
+}
+.nav-link:hover { color: var(--bronze); }
+.nav-link:focus-visible { outline: 2px solid var(--bronze); outline-offset: 3px; border-radius: 2px; }
+
+/* Nav right — flags + hamburger */
+.nav-right { display: flex; align-items: center; gap: .75rem; flex-shrink: 0; }
+
+/* ── FLAG BUTTONS ── */
+.lang-flags { display: flex; gap: 4px; align-items: center; }
+
+.flag-btn {
+  display: flex; align-items: center; gap: 5px;
+  background: none; border: 1px solid rgba(253,248,242,.25);
+  border-radius: 6px; cursor: pointer; padding: 4px 7px;
+  transition: all .22s var(--ease);
+  min-width: 44px; min-height: 34px; justify-content: center;
+}
+#nav.scrolled .flag-btn { border-color: rgba(176,120,72,.18); }
+
+.flag-btn:hover {
+  background: rgba(201,138,88,.18);
+  border-color: var(--copper);
+}
+.flag-btn.active {
+  background: var(--copper);
+  border-color: var(--copper);
+}
+.flag-btn:focus-visible { outline: 2px solid var(--tan); outline-offset: 2px; }
+
+.flag-emoji {
+  font-size: 1rem; line-height: 1;
+  /* emoji flags look best unfiltered */
+}
+.flag-code {
+  font-size: .55rem; font-weight: 500; letter-spacing: .08em;
+  text-transform: uppercase;
+  color: rgba(253,248,242,.85);
+  transition: color .22s;
+}
+.flag-btn.active .flag-code { color: var(--inv); }
+#nav.scrolled .flag-code { color: var(--text-2); }
+#nav.scrolled .flag-btn.active .flag-code { color: var(--inv); }
+#nav.scrolled .flag-btn:hover .flag-code { color: var(--inv); }
+
+/* Hamburger */
+.hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer;
+  padding: 6px; min-width: 44px; min-height: 44px;
+  align-items: center; justify-content: center;
+}
+.h-bar { width: 20px; height: 1.5px; background: currentColor; transition: all .3s; display: block; }
+.hamburger[aria-expanded=true] .h-bar:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.hamburger[aria-expanded=true] .h-bar:nth-child(2) { opacity: 0; }
+.hamburger[aria-expanded=true] .h-bar:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* Mobile nav */
+.mob-nav {
+  display: none; position: fixed; inset: 0; z-index: 190;
+  background: var(--dark); flex-direction: column; align-items: center; justify-content: center;
+  gap: 2.5rem; opacity: 0; transition: opacity .3s;
+}
+.mob-nav.open { display: flex; opacity: 1; }
+.mob-nav a {
+  font-family: var(--f-serif); font-size: clamp(2rem,6vw,3.5rem);
+  font-weight: 300; color: var(--inv); letter-spacing: .04em;
+  transition: color .2s; cursor: pointer;
+}
+.mob-nav a:hover { color: var(--tan); }
+.mob-close {
+  position: absolute; top: 1.5rem; right: 1.5rem;
+  background: none; border: none; color: rgba(253,248,242,.6); cursor: pointer;
+  min-width: 44px; min-height: 44px; display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; transition: color .2s;
+}
+.mob-close:hover { color: var(--inv); }
+
+/* Mobile lang flags inside mobile nav */
+.mob-lang {
+  display: flex; gap: 8px; margin-top: 1rem;
+}
+.mob-flag {
+  display: flex; align-items: center; gap: 5px;
+  background: rgba(253,248,242,.06); border: 1px solid rgba(253,248,242,.15);
+  border-radius: 6px; padding: 6px 12px; cursor: pointer;
+  font-size: .65rem; letter-spacing: .1em; text-transform: uppercase;
+  color: rgba(253,248,242,.5); transition: all .2s; min-height: 44px;
+  background: none; font-family: var(--f-sans);
+}
+.mob-flag .flag-emoji { font-size: 1.1rem; }
+.mob-flag.active { background: rgba(201,138,88,.2); border-color: var(--copper); color: var(--tan); }
+.mob-flag:hover { border-color: var(--tan); color: rgba(253,248,242,.8); }
+
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  #nav { padding: 1.2rem 1.5rem; }
+  #nav.scrolled { padding: .85rem 1.5rem; }
+  .flag-code { display: none; }   /* solo bandera en móvil, sin código */
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+#hero {
+  position: relative; min-height: 100svh; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background-image: url('https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=1920&q=80');
+  background-size: cover; background-position: center;
+  transform: scale(1.08);
+  animation: heroZoom 18s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes heroZoom {
+  from { transform: scale(1.08) translateY(0); }
+  to   { transform: scale(1.14) translateY(-2%); }
+}
+.hero-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(160deg, rgba(18,10,4,.78) 0%, rgba(28,18,8,.55) 45%, rgba(40,24,10,.72) 100%);
+}
+.hero-glow {
+  position: absolute; z-index: 2;
+  width: 700px; height: 700px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,138,88,.22) 0%, transparent 65%);
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+  animation: glowPulse 6s ease-in-out infinite; pointer-events: none;
+}
+@keyframes glowPulse {
+  0%,100% { opacity:.7; transform: translate(-50%,-50%) scale(1); }
+  50%      { opacity: 1; transform: translate(-50%,-50%) scale(1.15); }
+}
+.particles { position: absolute; inset: 0; z-index: 2; pointer-events: none; overflow: hidden; }
+.particle {
+  position: absolute; border-radius: 50%;
+  background: rgba(212,185,154,.18);
+  animation: floatUp linear infinite; will-change: transform,opacity;
+}
+@keyframes floatUp {
+  0%   { transform: translateY(100vh) scale(.4); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: .4; }
+  100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+}
+.hero-content {
+  position: relative; z-index: 3;
+  text-align: center; padding: 2rem 2rem 8rem;
+  max-width: 1000px; width: 100%;
+}
+.hero-tag {
+  display: inline-block;
+  font-size: .6rem; font-weight: 400; letter-spacing: .5em; text-transform: uppercase;
+  color: var(--tan); border: 1px solid rgba(212,185,154,.35);
+  padding: .5rem 1.5rem; border-radius: 100px; margin-bottom: 2.5rem;
+  opacity: 0; animation: fadeSlideUp .8s var(--ease) .3s forwards;
+}
+.hero-title {
+  font-family: var(--f-serif);
+  font-size: clamp(3.5rem,9vw,8rem);
+  font-weight: 300; line-height: .95; color: var(--inv); margin-bottom: 2rem;
+  opacity: 0; animation: fadeSlideUp .9s var(--ease) .5s forwards;
+}
+.hero-title em { font-style: italic; color: var(--tan); display: block; }
+.hero-title strong { display: block; font-weight: 600; letter-spacing: -.02em; }
+.hero-sub {
+  font-family: var(--f-serif); font-style: italic;
+  font-size: clamp(1rem,2.5vw,1.5rem); font-weight: 300;
+  color: rgba(253,248,242,.6); margin-bottom: 3rem;
+  opacity: 0; animation: fadeSlideUp .8s var(--ease) .75s forwards;
+}
+.hero-actions {
+  display: flex; gap: 1rem; align-items: center; justify-content: center; flex-wrap: wrap;
+  opacity: 0; animation: fadeSlideUp .8s var(--ease) 1s forwards;
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: .75rem;
+  background: var(--copper); color: var(--inv);
+  font-size: .7rem; font-weight: 500; letter-spacing: .22em; text-transform: uppercase;
+  padding: 1.1rem 2.5rem; border-radius: 100px; border: none; cursor: pointer;
+  transition: background .25s, transform .25s, box-shadow .25s;
+  position: relative; overflow: hidden;
+}
+.btn-primary::after {
+  content:''; position: absolute; inset: 0;
+  background: rgba(255,255,255,.12); transform: translateX(-100%) skewX(-15deg);
+  transition: transform .4s var(--ease);
+}
+.btn-primary:hover::after { transform: translateX(120%) skewX(-15deg); }
+.btn-primary:hover { background: var(--earth); transform: translateY(-2px); box-shadow: 0 12px 35px rgba(176,120,72,.4); }
+.btn-primary svg { transition: transform .25s; }
+.btn-primary:hover svg { transform: translateX(4px); }
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: .75rem;
+  border: 1px solid rgba(253,248,242,.35); color: rgba(253,248,242,.85);
+  font-size: .7rem; font-weight: 300; letter-spacing: .22em; text-transform: uppercase;
+  padding: 1.1rem 2.5rem; border-radius: 100px; cursor: pointer; background: none;
+  transition: all .25s;
+}
+.btn-ghost:hover { background: rgba(253,248,242,.12); border-color: rgba(253,248,242,.6); color: var(--inv); }
+.hero-scroll {
+  position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+  z-index: 3; display: flex; flex-direction: column; align-items: center; gap: .5rem;
+  color: rgba(253,248,242,.45); font-size: .58rem; letter-spacing: .3em; text-transform: uppercase;
+  opacity: 0; animation: fadeSlideUp .8s var(--ease) 1.4s forwards;
+}
+.scroll-mouse {
+  width: 22px; height: 34px; border: 1.5px solid rgba(253,248,242,.3); border-radius: 12px;
+  display: flex; align-items: flex-start; justify-content: center; padding-top: 5px;
+}
+.scroll-dot {
+  width: 3px; height: 7px; background: var(--tan); border-radius: 2px;
+  animation: scrollDot 2s ease-in-out infinite;
+}
+@keyframes scrollDot {
+  0%,100% { transform: translateY(0); opacity: 1; }
+  60%      { transform: translateY(8px); opacity: 0; }
+}
+.hero-stats {
+  position: absolute; bottom: 0; left: 0; right: 0; z-index: 4;
+  background: rgba(28,18,8,.65); backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(212,185,154,.15);
+  display: grid; grid-template-columns: repeat(3,1fr);
+  opacity: 0; animation: fadeSlideUp .8s var(--ease) 1.2s forwards;
+}
+.hero-stat { padding: 1.4rem 2rem; text-align: center; border-right: 1px solid rgba(212,185,154,.12); }
+.hero-stat:last-child { border-right: none; }
+.hero-stat-num { font-family: var(--f-serif); font-size: clamp(1.5rem,3vw,2.25rem); font-weight: 400; color: var(--tan); line-height: 1; margin-bottom: .2rem; }
+.hero-stat-label { font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(253,248,242,.45); }
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@media (max-width:600px) {
+  .hero-stats { grid-template-columns: 1fr; }
+  .hero-stat { border-right: none; border-bottom: 1px solid rgba(212,185,154,.12); }
+  .hero-stat:last-child { border-bottom: none; }
+}
+
+/* ============================================================
+   TICKER
+   ============================================================ */
+.ticker { background: var(--bronze); overflow: hidden; padding: .85rem 0; display: flex; }
+.ticker-track { display: flex; gap: 0; white-space: nowrap; animation: ticker 30s linear infinite; will-change: transform; }
+.ticker-track:hover { animation-play-state: paused; }
+.ticker-item { display: inline-flex; align-items: center; gap: 1rem; font-size: .7rem; font-weight: 400; letter-spacing: .25em; text-transform: uppercase; color: rgba(253,248,242,.9); padding: 0 3rem; }
+.ticker-dot { width: 4px; height: 4px; background: rgba(253,248,242,.5); border-radius: 50%; flex-shrink: 0; }
+@keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* ============================================================
+   SECTION COMMON
+   ============================================================ */
+.section-py { padding: clamp(5rem,10vw,8rem) 0; }
+.container { max-width: 1280px; margin: 0 auto; padding: 0 clamp(1.25rem,5vw,3rem); }
+.eyebrow { font-size: .62rem; font-weight: 400; letter-spacing: .45em; text-transform: uppercase; color: var(--copper); display: block; margin-bottom: 1.25rem; }
+.eyebrow.light { color: var(--tan); }
+.section-title { font-family: var(--f-serif); font-size: clamp(2rem,4.5vw,3.5rem); font-weight: 300; line-height: 1.1; color: var(--text); }
+.section-title em { font-style: italic; color: var(--copper); }
+.section-title.light { color: var(--inv); }
+.section-title.light em { color: var(--tan); }
+.r { opacity: 0; transform: translateY(30px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+.r.vis { opacity: 1; transform: none; }
+.r.d1 { transition-delay: .1s; }
+.r.d2 { transition-delay: .2s; }
+.r.d3 { transition-delay: .3s; }
+.r.d4 { transition-delay: .4s; }
+@media (prefers-reduced-motion: reduce) {
+  .r { opacity: 1; transform: none; transition: none; }
+  *,*::before,*::after { animation-duration:.01ms !important; transition-duration:.01ms !important; }
+}
+
+/* ============================================================
+   HISTORIA
+   ============================================================ */
+#historia { background: var(--cream); }
+.historia-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(3rem,7vw,7rem); align-items: center; }
+.img-stack { position: relative; }
+.img-main { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 2px; }
+.img-accent {
+  position: absolute; width: 48%; aspect-ratio: 1; object-fit: cover; border-radius: 2px;
+  bottom: -2.5rem; right: -2rem;
+  border: 5px solid var(--cream); box-shadow: 0 20px 60px rgba(28,18,8,.18);
+}
+.img-badge {
+  position: absolute; top: 2rem; left: -1.5rem;
+  background: var(--dark); color: var(--inv);
+  font-family: var(--f-serif); padding: 1rem 1.25rem; border-radius: 2px; text-align: center;
+  box-shadow: 0 12px 40px rgba(28,18,8,.25);
+}
+.img-badge .year { font-size: 2rem; font-weight: 600; display: block; line-height: 1; color: var(--tan); }
+.img-badge .since { font-size: .58rem; letter-spacing: .25em; text-transform: uppercase; color: rgba(253,248,242,.5); margin-top: .25rem; display: block; }
+.historia-text { padding-right: 1rem; }
+.historia-text .section-title { margin-bottom: 1.75rem; }
+.historia-text p { font-size: .9rem; color: var(--text-2); line-height: 1.85; margin-bottom: 1.1rem; }
+.divider-line { width: 50px; height: 1.5px; background: var(--copper); margin: 1.75rem 0; opacity: .6; }
+.tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 2rem; }
+.tag { font-size: .62rem; letter-spacing: .15em; text-transform: uppercase; font-weight: 400; padding: .45rem 1rem; border: 1px solid rgba(176,120,72,.25); border-radius: 100px; color: var(--text-3); background: var(--warm); }
+@media (max-width: 768px) {
+  .historia-wrap { grid-template-columns: 1fr; }
+  .img-accent { right: 0; }
+  .img-badge { left: 0; }
+  .historia-text { padding-right: 0; }
+}
+
+/* ============================================================
+   QUOTE
+   ============================================================ */
+#quote { background: var(--dark); position: relative; overflow: hidden; padding: clamp(4rem,8vw,7rem) 0; }
+#quote::before {
+  content: '«'; position: absolute; left: 5%; top: 50%; transform: translateY(-50%);
+  font-family: var(--f-serif); font-size: 20rem; line-height: 1;
+  color: rgba(212,185,154,.06); pointer-events: none; user-select: none;
+}
+.quote-inner { max-width: 900px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
+.quote-text { font-family: var(--f-serif); font-style: italic; font-weight: 300; font-size: clamp(1.2rem,3vw,2rem); color: rgba(253,248,242,.8); line-height: 1.55; margin-bottom: 1.5rem; }
+.quote-attr { font-size: .62rem; letter-spacing: .35em; text-transform: uppercase; color: var(--tan); display: block; }
+
+/* ============================================================
+   CARTA
+   ============================================================ */
+#carta { background: var(--dark-2); }
+.carta-header { text-align: center; margin-bottom: clamp(2.5rem,5vw,4rem); }
+.carta-header p { font-size: .9rem; color: rgba(253,248,242,.5); margin-top: .75rem; max-width: 480px; margin-left: auto; margin-right: auto; }
+.filter-tabs { display: flex; gap: .5rem; justify-content: center; margin-bottom: 3rem; flex-wrap: wrap; }
+.f-tab { font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; font-weight: 400; padding: .55rem 1.4rem; border: 1px solid rgba(212,185,154,.2); border-radius: 100px; color: rgba(253,248,242,.5); background: none; cursor: pointer; transition: all .25s; }
+.f-tab:hover { border-color: var(--tan); color: rgba(253,248,242,.8); }
+.f-tab.active { background: var(--copper); color: var(--inv); border-color: var(--copper); }
+.f-tab:focus-visible { outline: 2px solid var(--tan); outline-offset: 2px; }
+.products-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(300px,1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+.p-card { background: rgba(255,255,255,.04); border: 1px solid rgba(212,185,154,.1); border-radius: 4px; overflow: hidden; transition: transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s; cursor: default; }
+.p-card:hover { transform: translateY(-5px); box-shadow: 0 24px 60px rgba(0,0,0,.35); border-color: rgba(201,138,88,.3); }
+.p-img-wrap { position: relative; overflow: hidden; aspect-ratio: 16/11; }
+.p-img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--ease); }
+.p-card:hover .p-img { transform: scale(1.06); }
+.p-badge { position: absolute; top: 1rem; left: 1rem; font-size: .56rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 500; padding: .35rem .9rem; border-radius: 100px; background: var(--copper); color: var(--inv); }
+.p-body { padding: 1.4rem; }
+.p-name { font-family: var(--f-serif); font-size: 1.2rem; font-weight: 400; color: var(--inv); margin-bottom: .4rem; line-height: 1.3; }
+.p-desc { font-size: .8rem; color: rgba(253,248,242,.45); line-height: 1.7; margin-bottom: 1.2rem; }
+.p-footer { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.p-price { font-family: var(--f-serif); font-size: 1.3rem; font-weight: 600; color: var(--tan); }
+.allergens { display: flex; flex-wrap: wrap; gap: 4px; }
+.chip { font-size: .55rem; letter-spacing: .08em; padding: 3px 8px; border-radius: 100px; border: 1px solid rgba(212,185,154,.18); color: rgba(253,248,242,.4); }
+.chip.ok { border-color: rgba(80,180,120,.25); color: rgba(100,200,140,.7); }
+.carta-footer { text-align: center; }
+.btn-outline-light { display: inline-flex; align-items: center; gap: .75rem; border: 1px solid rgba(212,185,154,.35); color: rgba(253,248,242,.7); font-size: .68rem; letter-spacing: .22em; text-transform: uppercase; font-weight: 400; padding: 1rem 2.5rem; border-radius: 100px; cursor: pointer; background: none; transition: all .25s; }
+.btn-outline-light:hover { background: var(--copper); color: var(--inv); border-color: var(--copper); }
+.btn-outline-light:focus-visible { outline: 2px solid var(--tan); outline-offset: 3px; }
+.btn-outline-light svg { transition: transform .25s; }
+.btn-outline-light:hover svg { transform: translateX(4px); }
+
+/* ============================================================
+   GALERÍA
+   ============================================================ */
+#galeria { background: var(--warm); }
+.galeria-header { text-align: center; margin-bottom: clamp(2.5rem,5vw,4rem); }
+.mosaic { display: grid; grid-template-columns: repeat(6,1fr); grid-template-rows: repeat(3,220px); gap: 10px; }
+.mosaic-item { overflow: hidden; border-radius: 3px; position: relative; cursor: zoom-in; }
+.mosaic-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .55s var(--ease); }
+.mosaic-item:hover img { transform: scale(1.07); }
+.mosaic-item::after { content:''; position: absolute; inset: 0; background: linear-gradient(180deg,transparent 50%,rgba(28,18,8,.5) 100%); opacity: 0; transition: opacity .35s; }
+.mosaic-item:hover::after { opacity: 1; }
+.mosaic-item:nth-child(1) { grid-column: 1/3; grid-row: 1/3; }
+.mosaic-item:nth-child(2) { grid-column: 3/5; grid-row: 1/2; }
+.mosaic-item:nth-child(3) { grid-column: 5/7; grid-row: 1/2; }
+.mosaic-item:nth-child(4) { grid-column: 3/4; grid-row: 2/3; }
+.mosaic-item:nth-child(5) { grid-column: 4/7; grid-row: 2/4; }
+.mosaic-item:nth-child(6) { grid-column: 1/3; grid-row: 3/4; }
+.mosaic-item:nth-child(7) { grid-column: 3/5; grid-row: 3/4; }
+@media (max-width: 900px) {
+  .mosaic { grid-template-columns: repeat(2,1fr); grid-template-rows: repeat(4,200px); }
+  .mosaic-item { grid-column: auto !important; grid-row: auto !important; }
+}
+@media (max-width: 480px) {
+  .mosaic { grid-template-columns: 1fr; grid-template-rows: none; }
+  .mosaic-item { height: 220px; }
+}
+
+/* ============================================================
+   UBICACIÓN
+   ============================================================ */
+#ubicacion { background: var(--cream); }
+.ubi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(3rem,7vw,7rem); align-items: start; }
+.ubi-info .section-title { margin-bottom: 2.5rem; }
+.info-row { display: flex; gap: 1.25rem; align-items: flex-start; margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(176,120,72,.1); }
+.info-row:last-child { border-bottom: none; }
+.info-ico { width: 42px; height: 42px; flex-shrink: 0; background: var(--warm); border: 1px solid rgba(176,120,72,.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--copper); }
+.info-ico svg { width: 18px; height: 18px; }
+.info-lbl { font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: var(--text-3); margin-bottom: .35rem; display: block; }
+.info-val { font-size: .9rem; color: var(--text-2); line-height: 1.65; }
+.info-val a { color: var(--copper); text-decoration: underline; text-decoration-color: transparent; transition: text-decoration-color .2s; cursor: pointer; }
+.info-val a:hover { text-decoration-color: var(--copper); }
+.horario-row { display: flex; justify-content: space-between; gap: 1rem; padding: .45rem 0; border-bottom: 1px solid rgba(176,120,72,.07); font-size: .85rem; }
+.horario-row:last-child { border-bottom: none; }
+.h-dia { color: var(--text-2); }
+.h-hora { color: var(--text); font-weight: 400; }
+.h-cerrado { color: var(--text-3); font-style: italic; }
+.map-box { background: var(--dark); border-radius: 4px; overflow: hidden; aspect-ratio: .85; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; box-shadow: 0 24px 70px rgba(28,18,8,.18); }
+.map-lines { position: absolute; inset: 0; overflow: hidden; opacity: .06; background-image: linear-gradient(rgba(212,185,154,1) 1px,transparent 1px), linear-gradient(90deg,rgba(212,185,154,1) 1px,transparent 1px); background-size: 40px 40px; }
+.map-content { position: relative; z-index: 1; text-align: center; padding: 2rem; }
+.map-pin { width: 56px; height: 56px; background: var(--copper); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--inv); margin: 0 auto 1.5rem; box-shadow: 0 0 0 12px rgba(201,138,88,.15),0 0 0 24px rgba(201,138,88,.06); animation: pinPulse 3s ease-in-out infinite; }
+@keyframes pinPulse {
+  0%,100% { box-shadow: 0 0 0 8px rgba(201,138,88,.15),0 0 0 18px rgba(201,138,88,.06); }
+  50%      { box-shadow: 0 0 0 16px rgba(201,138,88,.15),0 0 0 32px rgba(201,138,88,.06); }
+}
+.map-pin svg { width: 24px; height: 24px; }
+.map-addr { font-family: var(--f-serif); font-size: 1.1rem; color: var(--inv); line-height: 1.4; margin-bottom: .4rem; }
+.map-city { font-size: .75rem; color: rgba(253,248,242,.45); margin-bottom: 1.75rem; }
+.map-btn { display: inline-flex; align-items: center; gap: .6rem; background: var(--copper); color: var(--inv); font-size: .65rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 400; padding: .75rem 1.75rem; border-radius: 100px; cursor: pointer; border: none; transition: background .25s,transform .25s; }
+.map-btn:hover { background: var(--earth); transform: translateY(-1px); }
+@media (max-width: 768px) { .ubi-grid { grid-template-columns: 1fr; } }
+
+/* ============================================================
+   CONTACTO
+   ============================================================ */
+#contacto { background: var(--dark); }
+.contact-wrap { max-width: 700px; margin: 0 auto; }
+.contact-wrap .eyebrow { margin-bottom: 1.5rem; }
+.contact-wrap .section-title { margin-bottom: .75rem; }
+.contact-wrap > p { font-size: .9rem; color: rgba(253,248,242,.45); margin-bottom: 3rem; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.form-field { margin-bottom: 2rem; }
+.form-field label { font-size: .6rem; letter-spacing: .22em; text-transform: uppercase; color: rgba(253,248,242,.4); display: block; margin-bottom: .65rem; }
+.form-field input, .form-field textarea, .form-field select { width: 100%; background: transparent; border: none; border-bottom: 1px solid rgba(212,185,154,.2); padding: .65rem 0; font-size: .9rem; color: var(--inv); outline: none; transition: border-color .25s; border-radius: 0; }
+.form-field input::placeholder, .form-field textarea::placeholder { color: rgba(253,248,242,.2); font-style: italic; }
+.form-field input:focus, .form-field textarea:focus, .form-field select:focus { border-color: var(--copper); }
+.form-field select { -webkit-appearance: none; appearance: none; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(212,185,154,.5)' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right .5rem center; padding-right: 2rem; }
+.form-field select option { background: var(--dark-2); color: var(--inv); }
+.form-field textarea { resize: vertical; min-height: 120px; line-height: 1.75; }
+.btn-send { width: 100%; display: flex; align-items: center; justify-content: center; gap: .75rem; background: var(--copper); color: var(--inv); border: none; cursor: pointer; font-size: .7rem; font-weight: 500; letter-spacing: .25em; text-transform: uppercase; padding: 1.2rem; border-radius: 2px; margin-top: .5rem; transition: background .25s,transform .25s,box-shadow .25s; position: relative; overflow: hidden; }
+.btn-send::after { content:''; position: absolute; inset: 0; background: rgba(255,255,255,.1); transform: translateX(-100%) skewX(-15deg); transition: transform .4s var(--ease); }
+.btn-send:hover::after { transform: translateX(120%) skewX(-15deg); }
+.btn-send:hover { background: var(--earth); transform: translateY(-2px); box-shadow: 0 12px 35px rgba(176,120,72,.3); }
+.btn-send:focus-visible { outline: 2px solid var(--tan); outline-offset: 3px; }
+.btn-send svg { transition: transform .25s; }
+.btn-send:hover svg { transform: translateX(4px); }
+.form-ok { display: none; text-align: center; padding: 2.5rem; border: 1px solid rgba(201,138,88,.25); border-radius: 4px; background: rgba(201,138,88,.06); }
+.form-ok p { font-family: var(--f-serif); font-style: italic; font-size: 1.3rem; color: var(--tan); }
+@media (max-width: 480px) { .form-grid { grid-template-columns: 1fr; } }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer { background: var(--dark-3); color: var(--inv); padding: clamp(3.5rem,7vw,5rem) 0 0; border-top: 1px solid rgba(212,185,154,.08); }
+.footer-top { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: clamp(2rem,5vw,4rem); padding-bottom: clamp(3rem,5vw,4rem); border-bottom: 1px solid rgba(212,185,154,.08); }
+.f-brand { font-family: var(--f-serif); font-size: 1.3rem; font-weight: 300; line-height: 1.25; color: var(--inv); margin-bottom: .75rem; }
+.f-brand em { font-style: italic; color: var(--tan); }
+.f-tagline { font-family: var(--f-serif); font-style: italic; font-size: .9rem; font-weight: 300; color: rgba(253,248,242,.4); line-height: 1.6; margin-bottom: 1.75rem; }
+.social-row { display: flex; gap: .6rem; }
+.soc { width: 38px; height: 38px; border: 1px solid rgba(212,185,154,.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: rgba(253,248,242,.4); cursor: pointer; transition: all .25s; }
+.soc:hover { background: var(--copper); border-color: var(--copper); color: var(--inv); }
+.soc:focus-visible { outline: 2px solid var(--tan); outline-offset: 2px; }
+.soc svg { width: 15px; height: 15px; }
+.f-col h5 { font-size: .6rem; letter-spacing: .3em; text-transform: uppercase; color: rgba(253,248,242,.25); margin-bottom: 1.25rem; font-weight: 400; }
+.f-col ul { display: flex; flex-direction: column; gap: .65rem; }
+.f-col a { font-size: .85rem; color: rgba(253,248,242,.5); cursor: pointer; transition: color .2s; line-height: 1.5; }
+.f-col a:hover { color: var(--inv); }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; padding: 1.4rem 0; font-size: .7rem; color: rgba(253,248,242,.25); }
+@media (max-width: 768px) { .footer-top { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+/* Scroll top */
+#stb { position: fixed; bottom: 2rem; right: 2rem; z-index: 100; width: 44px; height: 44px; border-radius: 50%; background: var(--copper); color: var(--inv); border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 8px 24px rgba(176,120,72,.35); opacity: 0; transform: translateY(12px); transition: opacity .3s, transform .3s, background .25s; }
+#stb.vis { opacity: 1; transform: none; }
+#stb:hover { background: var(--earth); }
+#stb svg { width: 18px; height: 18px; }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip" data-i18n="skip">Ir al contenido</a>
+
+<!-- NAV -->
+<nav id="nav" class="dark-mode" aria-label="Navegación principal">
+  <a href="#" class="nav-logo" aria-label="Pâtisserie Boulangerie Reiger">
+    <em>Pâtisserie</em> Boulangerie Reiger
+  </a>
+
+  <div class="nav-links" role="list">
+    <a href="#historia" class="nav-link" role="listitem" data-i18n="nav_historia">Historia</a>
+    <a href="#carta"    class="nav-link" role="listitem" data-i18n="nav_carta">Carta</a>
+    <a href="#galeria"  class="nav-link" role="listitem" data-i18n="nav_galeria">Galería</a>
+    <a href="#ubicacion" class="nav-link" role="listitem" data-i18n="nav_ubicacion">Ubicación</a>
+    <a href="#contacto"  class="nav-link" role="listitem" data-i18n="nav_contacto">Contacto</a>
+  </div>
+
+  <!-- FLAGS + hamburger -->
+  <div class="nav-right">
+    <div class="lang-flags" role="group" aria-label="Idioma / Language">
+      <button class="flag-btn active" data-lang="es" aria-pressed="true" aria-label="Español">
+        <span class="flag-emoji" aria-hidden="true">🇪🇸</span>
+        <span class="flag-code">ES</span>
+      </button>
+      <button class="flag-btn" data-lang="fr" aria-pressed="false" aria-label="Français">
+        <span class="flag-emoji" aria-hidden="true">🇫🇷</span>
+        <span class="flag-code">FR</span>
+      </button>
+      <button class="flag-btn" data-lang="en" aria-pressed="false" aria-label="English">
+        <span class="flag-emoji" aria-hidden="true">🇬🇧</span>
+        <span class="flag-code">EN</span>
+      </button>
+      <button class="flag-btn" data-lang="nl" aria-pressed="false" aria-label="Nederlands (België)">
+        <span class="flag-emoji" aria-hidden="true">🇧🇪</span>
+        <span class="flag-code">NL</span>
+      </button>
+    </div>
+    <button class="hamburger" id="ham" aria-expanded="false" aria-controls="mobNav" aria-label="Menú">
+      <span class="h-bar"></span><span class="h-bar"></span><span class="h-bar"></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mob-nav" id="mobNav" role="dialog" aria-modal="true">
+  <button class="mob-close" id="mobClose" aria-label="Cerrar">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+  </button>
+  <a href="#historia" data-i18n="nav_historia">Historia</a>
+  <a href="#carta"    data-i18n="nav_carta">Carta</a>
+  <a href="#galeria"  data-i18n="nav_galeria">Galería</a>
+  <a href="#ubicacion" data-i18n="nav_ubicacion">Ubicación</a>
+  <a href="#contacto"  data-i18n="nav_contacto">Contacto</a>
+  <!-- Lang flags inside mobile nav -->
+  <div class="mob-lang" role="group" aria-label="Idioma">
+    <button class="mob-flag active" data-lang="es" aria-label="Español"><span class="flag-emoji">🇪🇸</span> ES</button>
+    <button class="mob-flag" data-lang="fr" aria-label="Français"><span class="flag-emoji">🇫🇷</span> FR</button>
+    <button class="mob-flag" data-lang="en" aria-label="English"><span class="flag-emoji">🇬🇧</span> EN</button>
+    <button class="mob-flag" data-lang="nl" aria-label="Nederlands"><span class="flag-emoji">🇧🇪</span> NL</button>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- HERO -->
+<section id="hero" aria-label="Portada">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="particles" id="particles" aria-hidden="true"></div>
+
+  <div class="hero-content">
+    <span class="hero-tag" data-i18n="hero_tag">El Campello, Alicante · Artesanía Belga desde 1897</span>
+    <h1 class="hero-title">
+      <em>Pâtisserie</em>
+      <strong>Boulangerie<br>Reiger</strong>
+    </h1>
+    <p class="hero-sub" data-i18n="hero_sub">El arte de la pastelería belga, sublimado con pasión</p>
+    <div class="hero-actions">
+      <a href="#carta" class="btn-primary">
+        <span data-i18n="hero_cta1">Ver la Carta</span>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#historia" class="btn-ghost" data-i18n="hero_cta2">Nuestra Historia</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll" aria-hidden="true">
+    <div class="scroll-mouse"><div class="scroll-dot"></div></div>
+    <span data-i18n="hero_scroll">Scroll</span>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num">1897</div>
+      <div class="hero-stat-label" data-i18n="stat_fundacion">Año de fundación</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">+60</div>
+      <div class="hero-stat-label" data-i18n="stat_recetas">Recetas propias</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">4:30</div>
+      <div class="hero-stat-label" data-i18n="stat_hora">Hora de inicio</div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track" id="tickerTrack">
+    <span class="ticker-item" data-i18n="tick1">Croissant au Beurre Belge<span class="ticker-dot"></span></span>
+    <span class="ticker-item" data-i18n="tick2">Tarte au Citron Meringuée<span class="ticker-dot"></span></span>
+    <span class="ticker-item" data-i18n="tick3">Pain au Chocolat Praliné<span class="ticker-dot"></span></span>
+    <span class="ticker-item" data-i18n="tick4">Mille-feuille Vanille<span class="ticker-dot"></span></span>
+    <span class="ticker-item" data-i18n="tick5">Artisanat Belge · El Campello<span class="ticker-dot"></span></span>
+    <span class="ticker-item" data-i18n="tick6">Depuis 1897<span class="ticker-dot"></span></span>
+    <span class="ticker-item" data-i18n="tick7">Mantequilla AOP belga<span class="ticker-dot"></span></span>
+    <span class="ticker-item" data-i18n="tick8">Elaborado cada mañana<span class="ticker-dot"></span></span>
+    <!-- duplicado para loop -->
+    <span class="ticker-item" data-i18n="tick1">Croissant au Beurre Belge<span class="ticker-dot"></span></span>
+    <span class="ticker-item" data-i18n="tick2">Tarte au Citron Meringuée<span class="ticker-dot"></span></span>
+    <span class="ticker-item" data-i18n="tick3">Pain au Chocolat Praliné<span class="ticker-dot"></span></span>
+    <span class="ticker-item" data-i18n="tick4">Mille-feuille Vanille<span class="ticker-dot"></span></span>
+    <span class="ticker-item" data-i18n="tick5">Artisanat Belge · El Campello<span class="ticker-dot"></span></span>
+    <span class="ticker-item" data-i18n="tick6">Depuis 1897<span class="ticker-dot"></span></span>
+    <span class="ticker-item" data-i18n="tick7">Mantequilla AOP belga<span class="ticker-dot"></span></span>
+    <span class="ticker-item" data-i18n="tick8">Elaborado cada mañana<span class="ticker-dot"></span></span>
+  </div>
+</div>
+
+<!-- HISTORIA -->
+<section id="historia" class="section-py" aria-label="Historia">
+  <div class="container">
+    <div class="historia-wrap">
+      <div class="img-stack r">
+        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=700&h=875&auto=format&fit=crop&q=85" alt="Elaboración artesanal de pastelería belga" class="img-main" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1462009879-88871d9cc2e7?w=400&h=400&auto=format&fit=crop&q=85" alt="Tarta de limón merengada" class="img-accent" loading="lazy">
+        <div class="img-badge">
+          <span class="year">1897</span>
+          <span class="since" data-i18n="badge_since">Depuis</span>
+        </div>
+      </div>
+      <div>
+        <span class="eyebrow r" data-i18n="historia_eyebrow">Notre Histoire</span>
+        <h2 class="section-title r d1" data-i18n="historia_titulo">El arte belga llega a <em>la costa</em></h2>
+        <div class="divider-line r d1"></div>
+        <p class="r d2" data-i18n="historia_p1">La familia Reiger lleva más de un siglo perfeccionando el arte de la panadería y pastelería en Bélgica. Desde los talleres de Lieja, donde aprendimos los secretos de la masa hojaldrada, hasta las cocinas de Bruselas, cada receta es un poema escrito con mantequilla y paciencia.</p>
+        <p class="r d3" data-i18n="historia_p2">Hoy, con maquinaria de precisión importada directamente de Europa y técnicas transmitidas de generación en generación, traemos a El Campello una experiencia única: la autenticidad belga en cada bocado, elaborada cada mañana antes del amanecer.</p>
+        <p class="r d4" data-i18n="historia_p3">Nuestra filosofía es simple — los mejores ingredientes, el tiempo que necesita cada pieza, y el orgullo de quien firma su trabajo con nombre propio.</p>
+        <div class="tags r d4">
+          <span class="tag" data-i18n="tag1">Masa hojaldrada artesanal</span>
+          <span class="tag" data-i18n="tag2">Mantequilla AOP belga</span>
+          <span class="tag" data-i18n="tag3">Recetas de 1897</span>
+          <span class="tag" data-i18n="tag4">Sin conservantes</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<div id="quote">
+  <div class="container">
+    <blockquote class="quote-inner">
+      <p class="quote-text r" data-i18n="quote_text">La pâtisserie est un art qui se goûte avec les yeux avant de se savourer avec la bouche</p>
+      <cite class="quote-attr r d1" data-i18n="quote_attr">— Escuela Belga de Pastelería, Bruselas</cite>
+    </blockquote>
+  </div>
+</div>
+
+<!-- CARTA -->
+<section id="carta" class="section-py" aria-label="Carta">
+  <div class="container">
+    <header class="carta-header">
+      <span class="eyebrow light r" data-i18n="carta_eyebrow">Notre Carte</span>
+      <h2 class="section-title light r d1" data-i18n="carta_titulo">Una selección <em>exquisita</em></h2>
+      <p class="r d2" data-i18n="carta_sub">Elaborado con mantequilla belga AOP cada mañana antes del amanecer</p>
+    </header>
+    <div class="filter-tabs r" role="group">
+      <button class="f-tab active" aria-pressed="true" data-i18n="tab_todo">Todo</button>
+      <button class="f-tab" aria-pressed="false" data-i18n="tab_pasteleria">Pastelería</button>
+      <button class="f-tab" aria-pressed="false" data-i18n="tab_bolleria">Bollería</button>
+      <button class="f-tab" aria-pressed="false" data-i18n="tab_pan">Pan</button>
+      <button class="f-tab" aria-pressed="false" data-i18n="tab_choco">Chocolatería</button>
+    </div>
+    <div class="products-grid">
+      <article class="p-card r">
+        <div class="p-img-wrap">
+          <img src="https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=600&h=412&auto=format&fit=crop&q=85" alt="Tarte au Citron Meringuée" class="p-img" loading="lazy">
+          <span class="p-badge" data-i18n="badge_signature">Signature</span>
+        </div>
+        <div class="p-body">
+          <h3 class="p-name">Tarte au Citron Meringuée</h3>
+          <p class="p-desc" data-i18n="prod1_desc">Crema de limón siciliano sobre masa sablée belga, cubierta de merengue italiano tostado al momento.</p>
+          <div class="p-footer">
+            <span class="p-price">4,50 €</span>
+            <div class="allergens">
+              <span class="chip" data-i18n="chip_gluten">Gluten</span>
+              <span class="chip" data-i18n="chip_huevo">Huevo</span>
+              <span class="chip" data-i18n="chip_lacteos">Lácteos</span>
+              <span class="chip ok" data-i18n="chip_nofrutos">Sin frutos secos</span>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="p-card r d1">
+        <div class="p-img-wrap">
+          <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600&h=412&auto=format&fit=crop&q=85" alt="Croissant au Beurre Belge" class="p-img" loading="lazy">
+          <span class="p-badge" data-i18n="badge_artesanal">Artesanal</span>
+        </div>
+        <div class="p-body">
+          <h3 class="p-name">Croissant au Beurre Belge</h3>
+          <p class="p-desc" data-i18n="prod2_desc">27 capas de masa hojaldrada elaboradas a mano con mantequilla AOP belga. Crujiente por fuera, sedoso por dentro.</p>
+          <div class="p-footer">
+            <span class="p-price">2,80 €</span>
+            <div class="allergens">
+              <span class="chip" data-i18n="chip_gluten">Gluten</span>
+              <span class="chip" data-i18n="chip_lacteos">Lácteos</span>
+              <span class="chip ok" data-i18n="chip_nofrutos">Sin frutos secos</span>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="p-card r d2">
+        <div class="p-img-wrap">
+          <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&h=412&auto=format&fit=crop&q=85" alt="Pain au Chocolat" class="p-img" loading="lazy">
+          <span class="p-badge" data-i18n="badge_clasico">Clásico</span>
+        </div>
+        <div class="p-body">
+          <h3 class="p-name">Pain au Chocolat Praliné</h3>
+          <p class="p-desc" data-i18n="prod3_desc">Hojaldre mantequillado con dos barras de chocolate negro belga 70% y corazón de praliné de avellanas.</p>
+          <div class="p-footer">
+            <span class="p-price">3,20 €</span>
+            <div class="allergens">
+              <span class="chip" data-i18n="chip_gluten">Gluten</span>
+              <span class="chip" data-i18n="chip_lacteos">Lácteos</span>
+              <span class="chip" data-i18n="chip_frutos">Frutos secos</span>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="p-card r d3">
+        <div class="p-img-wrap">
+          <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600&h=412&auto=format&fit=crop&q=85" alt="Mille-feuille Vanille" class="p-img" loading="lazy">
+          <span class="p-badge" data-i18n="badge_signature">Signature</span>
+        </div>
+        <div class="p-body">
+          <h3 class="p-name">Mille-feuille à la Vanille</h3>
+          <p class="p-desc" data-i18n="prod4_desc">Tres capas de hojaldre caramelizado con crema pastelera de vainilla de Madagascar y glaseado fondant.</p>
+          <div class="p-footer">
+            <span class="p-price">4,80 €</span>
+            <div class="allergens">
+              <span class="chip" data-i18n="chip_gluten">Gluten</span>
+              <span class="chip" data-i18n="chip_huevo">Huevo</span>
+              <span class="chip" data-i18n="chip_lacteos">Lácteos</span>
+              <span class="chip ok" data-i18n="chip_nofrutos">Sin frutos secos</span>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+    <div class="carta-footer r">
+      <a href="#contacto" class="btn-outline-light">
+        <span data-i18n="carta_btn">Explorar la carta completa</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- GALERÍA -->
+<section id="galeria" class="section-py" aria-label="Galería">
+  <div class="container">
+    <header class="galeria-header">
+      <span class="eyebrow r" data-i18n="galeria_eyebrow">Galerie</span>
+      <h2 class="section-title r d1" data-i18n="galeria_titulo">El placer de <em>lo bello</em></h2>
+    </header>
+    <div class="mosaic">
+      <div class="mosaic-item r"><img src="https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?w=700&h=900&auto=format&fit=crop&q=85" alt="Bollería artesanal" loading="lazy"></div>
+      <div class="mosaic-item r d1"><img src="https://images.unsplash.com/photo-1549931319-a545dcf3bc7b?w=600&h=400&auto=format&fit=crop&q=85" alt="Pan artesanal" loading="lazy"></div>
+      <div class="mosaic-item r d2"><img src="https://images.unsplash.com/photo-1481391319762-47dff72954d9?w=600&h=400&auto=format&fit=crop&q=85" alt="Chocolate belga" loading="lazy"></div>
+      <div class="mosaic-item r d1"><img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&h=300&auto=format&fit=crop&q=85" alt="Macarons" loading="lazy"></div>
+      <div class="mosaic-item r d2"><img src="https://images.unsplash.com/photo-1464305795204-6f5bbfc7fb81?w=700&h=900&auto=format&fit=crop&q=85" alt="Cafetería" loading="lazy"></div>
+      <div class="mosaic-item r d3"><img src="https://images.unsplash.com/photo-1442975631134-7d1eb035e63f?w=500&h=350&auto=format&fit=crop&q=85" alt="Café" loading="lazy"></div>
+      <div class="mosaic-item r d2"><img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=500&h=350&auto=format&fit=crop&q=85" alt="Praliné belga" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<!-- UBICACIÓN -->
+<section id="ubicacion" class="section-py" aria-label="Ubicación">
+  <div class="container">
+    <div class="ubi-grid">
+      <div class="ubi-info">
+        <span class="eyebrow r" data-i18n="ubi_eyebrow">Où nous trouver</span>
+        <h2 class="section-title r d1" data-i18n="ubi_titulo">Visítenos en <em>El Campello</em></h2>
+        <div class="info-row r d2">
+          <div class="info-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div>
+            <span class="info-lbl" data-i18n="lbl_direccion">Dirección</span>
+            <p class="info-val">Carrer de Juan de la Cierva, 46<br>03560 El Campello, Alicante<br>
+              <a href="https://maps.google.com/?q=Carrer+de+Juan+de+la+Cierva+46+El+Campello" target="_blank" rel="noopener" data-i18n="lbl_maps">Ver en Google Maps →</a>
+            </p>
+          </div>
+        </div>
+        <div class="info-row r d2">
+          <div class="info-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.85 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.77 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.89a16 16 0 0 0 6.29 6.29l1.17-1.17a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <div>
+            <span class="info-lbl" data-i18n="lbl_telefono">Teléfono</span>
+            <p class="info-val"><a href="tel:+34965000123">+34 965 000 123</a></p>
+          </div>
+        </div>
+        <div class="info-row r d2">
+          <div class="info-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div>
+            <span class="info-lbl">Email</span>
+            <p class="info-val"><a href="mailto:bonjour@patisserie-reiger.es">bonjour@patisserie-reiger.es</a></p>
+          </div>
+        </div>
+        <div class="info-row r d3">
+          <div class="info-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg></div>
+          <div>
+            <span class="info-lbl" data-i18n="lbl_horarios">Horarios</span>
+            <div>
+              <div class="horario-row"><span class="h-dia" data-i18n="h_lun">Lunes</span><span class="h-hora h-cerrado" data-i18n="h_cerrado">Cerrado</span></div>
+              <div class="horario-row"><span class="h-dia" data-i18n="h_marjue">Martes — Jueves</span><span class="h-hora">8:00 — 20:00</span></div>
+              <div class="horario-row"><span class="h-dia" data-i18n="h_vie">Viernes</span><span class="h-hora">8:00 — 20:30</span></div>
+              <div class="horario-row"><span class="h-dia" data-i18n="h_sabdom">Sábado — Domingo</span><span class="h-hora">8:00 — 21:00</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="r d2">
+        <div class="map-box" role="img" aria-label="Mapa — El Campello">
+          <div class="map-lines" aria-hidden="true"></div>
+          <div class="map-content">
+            <div class="map-pin" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <p class="map-addr">Carrer de Juan de la Cierva, 46</p>
+            <p class="map-city">El Campello · 03560 · Alicante</p>
+            <a href="https://maps.google.com/?q=Carrer+de+Juan+de+la+Cierva+46+El+Campello" target="_blank" rel="noopener" class="map-btn">
+              <span data-i18n="map_btn">Abrir en Maps</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto" class="section-py" aria-label="Contacto">
+  <div class="container">
+    <div class="contact-wrap">
+      <span class="eyebrow light r" data-i18n="contact_eyebrow">Réservations &amp; Contact</span>
+      <h2 class="section-title light r d1" data-i18n="contact_titulo">¿Tiene alguna <em>pregunta?</em></h2>
+      <p class="r d2" data-i18n="contact_sub">Estamos encantados de atenderle para pedidos especiales, eventos privados o reservas.</p>
+      <form id="cForm" class="r d2" novalidate>
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="fn" data-i18n="form_nombre">Nombre</label>
+            <input type="text" id="fn" name="nombre" autocomplete="name" required data-i18n-placeholder="form_nombre_ph">
+          </div>
+          <div class="form-field">
+            <label for="fe" data-i18n="form_email">Email</label>
+            <input type="email" id="fe" name="email" autocomplete="email" required data-i18n-placeholder="form_email_ph">
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="fm" data-i18n="form_motivo">Motivo</label>
+          <select id="fm" name="motivo">
+            <option value="" data-i18n="form_sel">Seleccione una opción</option>
+            <option data-i18n="form_opt1">Pedido especial</option>
+            <option data-i18n="form_opt2">Evento privado</option>
+            <option data-i18n="form_opt3">Reserva</option>
+            <option data-i18n="form_opt4">Otro</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="fmsg" data-i18n="form_mensaje">Mensaje</label>
+          <textarea id="fmsg" name="mensaje" required data-i18n-placeholder="form_mensaje_ph"></textarea>
+        </div>
+        <button type="submit" class="btn-send" id="sendBtn">
+          <span data-i18n="form_enviar">Enviar mensaje</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </form>
+      <div class="form-ok" id="formOk" role="alert"><p data-i18n="form_ok">Merci — Le responderemos a la brevedad.</p></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <p class="f-brand"><em>Pâtisserie</em><br>Boulangerie Reiger</p>
+        <p class="f-tagline" data-i18n="footer_tagline">L'art de la pâtisserie belge,<br>au cœur de la Costa Blanca.</p>
+        <nav class="social-row" aria-label="Redes sociales">
+          <a href="#" class="soc" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="#" class="soc" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="#" class="soc" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg></a>
+        </nav>
+      </div>
+      <nav class="f-col" aria-label="Navegación footer">
+        <h5 data-i18n="footer_nav_titulo">Navegación</h5>
+        <ul>
+          <li><a href="#historia" data-i18n="nav_historia">Historia</a></li>
+          <li><a href="#carta"    data-i18n="nav_carta">Carta</a></li>
+          <li><a href="#galeria"  data-i18n="nav_galeria">Galería</a></li>
+          <li><a href="#ubicacion" data-i18n="nav_ubicacion">Ubicación</a></li>
+          <li><a href="#contacto"  data-i18n="nav_contacto">Contacto</a></li>
+        </ul>
+      </nav>
+      <address class="f-col" style="font-style:normal">
+        <h5 data-i18n="footer_contact_titulo">Contacto</h5>
+        <ul>
+          <li><a href="tel:+34965000123">+34 965 000 123</a></li>
+          <li><a href="mailto:bonjour@patisserie-reiger.es">bonjour@patisserie-reiger.es</a></li>
+          <li><a href="https://maps.google.com/?q=Carrer+de+Juan+de+la+Cierva+46+El+Campello" target="_blank" rel="noopener">Carrer de Juan de la Cierva, 46<br>El Campello, Alicante</a></li>
+        </ul>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span data-i18n="footer_copy">© 2025 Pâtisserie Boulangerie Reiger. Todos los derechos reservados.</span>
+      <span data-i18n="footer_craft">Artisanat belge · El Campello</span>
+    </div>
+  </div>
+</footer>
+
+<button id="stb" aria-label="Volver arriba">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 15l-6-6-6 6"/></svg>
+</button>
+
+<script>
+/* ============================================================
+   TRANSLATIONS
+   ============================================================ */
+const T = {
+  es: {
+    skip:'Ir al contenido',
+    nav_historia:'Historia', nav_carta:'Carta', nav_galeria:'Galería',
+    nav_ubicacion:'Ubicación', nav_contacto:'Contacto',
+    hero_tag:'El Campello, Alicante · Artesanía Belga desde 1897',
+    hero_sub:'El arte de la pastelería belga, sublimado con pasión',
+    hero_cta1:'Ver la Carta', hero_cta2:'Nuestra Historia', hero_scroll:'Scroll',
+    stat_fundacion:'Año de fundación', stat_recetas:'Recetas propias', stat_hora:'Hora de inicio',
+    tick1:'Croissant au Beurre Belge', tick2:'Tarte au Citron Meringuée',
+    tick3:'Pain au Chocolat Praliné', tick4:'Mille-feuille Vanille',
+    tick5:'Artisanat Belge · El Campello', tick6:'Depuis 1897',
+    tick7:'Mantequilla AOP belga', tick8:'Elaborado cada mañana',
+    badge_since:'Depuis',
+    historia_eyebrow:'Notre Histoire',
+    historia_titulo:'El arte belga llega a <em>la costa</em>',
+    historia_p1:'La familia Reiger lleva más de un siglo perfeccionando el arte de la panadería y pastelería en Bélgica. Desde los talleres de Lieja, donde aprendimos los secretos de la masa hojaldrada, hasta las cocinas de Bruselas, cada receta es un poema escrito con mantequilla y paciencia.',
+    historia_p2:'Hoy, con maquinaria de precisión importada directamente de Europa y técnicas transmitidas de generación en generación, traemos a El Campello una experiencia única: la autenticidad belga en cada bocado, elaborada cada mañana antes del amanecer.',
+    historia_p3:'Nuestra filosofía es simple — los mejores ingredientes, el tiempo que necesita cada pieza, y el orgullo de quien firma su trabajo con nombre propio.',
+    tag1:'Masa hojaldrada artesanal', tag2:'Mantequilla AOP belga',
+    tag3:'Recetas de 1897', tag4:'Sin conservantes',
+    quote_text:'La pâtisserie est un art qui se goûte avec les yeux avant de se savourer avec la bouche',
+    quote_attr:'— Escuela Belga de Pastelería, Bruselas',
+    carta_eyebrow:'Notre Carte',
+    carta_titulo:'Una selección <em>exquisita</em>',
+    carta_sub:'Elaborado con mantequilla belga AOP cada mañana antes del amanecer',
+    tab_todo:'Todo', tab_pasteleria:'Pastelería', tab_bolleria:'Bollería',
+    tab_pan:'Pan', tab_choco:'Chocolatería',
+    badge_signature:'Signature', badge_artesanal:'Artesanal', badge_clasico:'Clásico',
+    prod1_desc:'Crema de limón siciliano sobre masa sablée belga, cubierta de merengue italiano tostado al momento.',
+    prod2_desc:'27 capas de masa hojaldrada elaboradas a mano con mantequilla AOP belga. Crujiente por fuera, sedoso por dentro.',
+    prod3_desc:'Hojaldre mantequillado con dos barras de chocolate negro belga 70% y corazón de praliné de avellanas.',
+    prod4_desc:'Tres capas de hojaldre caramelizado con crema pastelera de vainilla de Madagascar y glaseado fondant.',
+    chip_gluten:'Gluten', chip_huevo:'Huevo', chip_lacteos:'Lácteos',
+    chip_nofrutos:'Sin frutos secos', chip_frutos:'Frutos secos',
+    carta_btn:'Explorar la carta completa',
+    galeria_eyebrow:'Galerie',
+    galeria_titulo:'El placer de <em>lo bello</em>',
+    ubi_eyebrow:'Où nous trouver',
+    ubi_titulo:'Visítenos en <em>El Campello</em>',
+    lbl_direccion:'Dirección', lbl_maps:'Ver en Google Maps →',
+    lbl_telefono:'Teléfono', lbl_horarios:'Horarios',
+    h_lun:'Lunes', h_cerrado:'Cerrado',
+    h_marjue:'Martes — Jueves', h_vie:'Viernes', h_sabdom:'Sábado — Domingo',
+    map_btn:'Abrir en Maps',
+    contact_eyebrow:'Réservations & Contact',
+    contact_titulo:'¿Tiene alguna <em>pregunta?</em>',
+    contact_sub:'Estamos encantados de atenderle para pedidos especiales, eventos privados o reservas.',
+    form_nombre:'Nombre', form_nombre_ph:'Jean Dupont',
+    form_email:'Email', form_email_ph:'jean@email.com',
+    form_motivo:'Motivo', form_sel:'Seleccione una opción',
+    form_opt1:'Pedido especial', form_opt2:'Evento privado',
+    form_opt3:'Reserva', form_opt4:'Otro',
+    form_mensaje:'Mensaje', form_mensaje_ph:'Cuéntenos en qué podemos ayudarle…',
+    form_enviar:'Enviar mensaje',
+    form_ok:'Merci — Le responderemos a la brevedad.',
+    footer_tagline:"L'art de la pâtisserie belge,\nau cœur de la Costa Blanca.",
+    footer_nav_titulo:'Navegación', footer_contact_titulo:'Contacto',
+    footer_copy:'© 2025 Pâtisserie Boulangerie Reiger. Todos los derechos reservados.',
+    footer_craft:'Artisanat belge · El Campello',
+  },
+  fr: {
+    skip:'Aller au contenu',
+    nav_historia:'Histoire', nav_carta:'Carte', nav_galeria:'Galerie',
+    nav_ubicacion:'Localisation', nav_contacto:'Contact',
+    hero_tag:'El Campello, Alicante · Artisanat Belge depuis 1897',
+    hero_sub:"L'art de la pâtisserie belge, sublimé avec passion",
+    hero_cta1:'Voir la Carte', hero_cta2:'Notre Histoire', hero_scroll:'Défiler',
+    stat_fundacion:'Année de fondation', stat_recetas:'Recettes exclusives', stat_hora:'Heure de début',
+    tick1:'Croissant au Beurre Belge', tick2:'Tarte au Citron Meringuée',
+    tick3:'Pain au Chocolat Praliné', tick4:'Mille-feuille Vanille',
+    tick5:'Artisanat Belge · El Campello', tick6:'Depuis 1897',
+    tick7:'Beurre AOP belge', tick8:'Préparé chaque matin',
+    badge_since:'Depuis',
+    historia_eyebrow:'Notre Histoire',
+    historia_titulo:"L'art belge arrive <em>sur la côte</em>",
+    historia_p1:"La famille Reiger perfectionne l'art de la boulangerie et de la pâtisserie en Belgique depuis plus d'un siècle. Des ateliers de Liège, où nous avons appris les secrets de la pâte feuilletée, aux cuisines de Bruxelles, chaque recette est un poème écrit avec du beurre et de la patience.",
+    historia_p2:"Aujourd'hui, avec des machines de précision importées directement d'Europe et des techniques transmises de génération en génération, nous apportons à El Campello une expérience unique : l'authenticité belge dans chaque bouchée, préparée chaque matin avant l'aube.",
+    historia_p3:"Notre philosophie est simple — les meilleurs ingrédients, le temps nécessaire à chaque pièce, et la fierté de celui qui signe son travail de son propre nom.",
+    tag1:'Feuilletage artisanal', tag2:'Beurre AOP belge',
+    tag3:'Recettes de 1897', tag4:'Sans conservateurs',
+    quote_text:'La pâtisserie est un art qui se goûte avec les yeux avant de se savourer avec la bouche',
+    quote_attr:'— École Belge de Pâtisserie, Bruxelles',
+    carta_eyebrow:'Notre Carte',
+    carta_titulo:'Une sélection <em>exquise</em>',
+    carta_sub:"Préparé avec du beurre belge AOP chaque matin avant l'aube",
+    tab_todo:'Tout', tab_pasteleria:'Pâtisserie', tab_bolleria:'Viennoiserie',
+    tab_pan:'Pain', tab_choco:'Chocolaterie',
+    badge_signature:'Signature', badge_artesanal:'Artisanal', badge_clasico:'Classique',
+    prod1_desc:"Crème de citron sicilien sur pâte sablée belge, couverte de meringue italienne flambée à la commande.",
+    prod2_desc:"27 couches de pâte feuilletée faites à la main avec du beurre AOP belge. Croustillant dehors, soyeux dedans.",
+    prod3_desc:"Feuilletage beurré avec deux barres de chocolat noir belge 70% et cœur de praliné aux noisettes.",
+    prod4_desc:"Trois couches de feuilletage caramélisé avec crème pâtissière à la vanille de Madagascar et glaçage fondant.",
+    chip_gluten:'Gluten', chip_huevo:'Œuf', chip_lacteos:'Laitiers',
+    chip_nofrutos:'Sans fruits à coque', chip_frutos:'Fruits à coque',
+    carta_btn:'Explorer la carte complète',
+    galeria_eyebrow:'Galerie',
+    galeria_titulo:'Le plaisir de <em>la beauté</em>',
+    ubi_eyebrow:'Où nous trouver',
+    ubi_titulo:'Visitez-nous à <em>El Campello</em>',
+    lbl_direccion:'Adresse', lbl_maps:'Voir sur Google Maps →',
+    lbl_telefono:'Téléphone', lbl_horarios:'Horaires',
+    h_lun:'Lundi', h_cerrado:'Fermé',
+    h_marjue:'Mardi — Jeudi', h_vie:'Vendredi', h_sabdom:'Samedi — Dimanche',
+    map_btn:'Ouvrir dans Maps',
+    contact_eyebrow:'Réservations & Contact',
+    contact_titulo:'Avez-vous une <em>question?</em>',
+    contact_sub:'Nous serons ravis de vous accueillir pour des commandes spéciales, des événements privés ou des réservations.',
+    form_nombre:'Nom', form_nombre_ph:'Jean Dupont',
+    form_email:'Email', form_email_ph:'jean@email.com',
+    form_motivo:'Motif', form_sel:'Sélectionnez une option',
+    form_opt1:'Commande spéciale', form_opt2:'Événement privé',
+    form_opt3:'Réservation', form_opt4:'Autre',
+    form_mensaje:'Message', form_mensaje_ph:'Dites-nous comment nous pouvons vous aider…',
+    form_enviar:'Envoyer le message',
+    form_ok:'Merci — Nous vous répondrons dans les plus brefs délais.',
+    footer_tagline:"L'art de la pâtisserie belge,\nau cœur de la Costa Blanca.",
+    footer_nav_titulo:'Navigation', footer_contact_titulo:'Contact',
+    footer_copy:'© 2025 Pâtisserie Boulangerie Reiger. Tous droits réservés.',
+    footer_craft:'Artisanat belge · El Campello',
+  },
+  en: {
+    skip:'Skip to content',
+    nav_historia:'History', nav_carta:'Menu', nav_galeria:'Gallery',
+    nav_ubicacion:'Location', nav_contacto:'Contact',
+    hero_tag:'El Campello, Alicante · Belgian Craftsmanship since 1897',
+    hero_sub:'The art of Belgian pastry, elevated with passion',
+    hero_cta1:'View the Menu', hero_cta2:'Our Story', hero_scroll:'Scroll',
+    stat_fundacion:'Year founded', stat_recetas:'Own recipes', stat_hora:'Starting time',
+    tick1:'Belgian Butter Croissant', tick2:'Lemon Meringue Tart',
+    tick3:'Chocolate Praline Pain', tick4:'Vanilla Mille-feuille',
+    tick5:'Belgian Craftsmanship · El Campello', tick6:'Since 1897',
+    tick7:'Belgian AOP butter', tick8:'Made fresh every morning',
+    badge_since:'Since',
+    historia_eyebrow:'Our Story',
+    historia_titulo:'Belgian artistry arrives <em>on the coast</em>',
+    historia_p1:'The Reiger family has been perfecting the art of baking and pastry-making in Belgium for over a century. From the workshops of Liège, where we learned the secrets of flaky dough, to the kitchens of Brussels, every recipe is a poem written in butter and patience.',
+    historia_p2:'Today, with precision equipment imported directly from Europe and techniques passed down through generations, we bring El Campello a unique experience: authentic Belgian quality in every bite, made fresh every morning before dawn.',
+    historia_p3:'Our philosophy is simple — the finest ingredients, the time each piece deserves, and the pride of someone who signs their work with their own name.',
+    tag1:'Artisan flaky pastry', tag2:'Belgian AOP butter',
+    tag3:'Recipes since 1897', tag4:'No preservatives',
+    quote_text:'Pastry-making is an art tasted with the eyes before savoured with the mouth',
+    quote_attr:'— Belgian School of Pastry, Brussels',
+    carta_eyebrow:'Our Menu',
+    carta_titulo:'An <em>exquisite</em> selection',
+    carta_sub:'Made with Belgian AOP butter every morning before dawn',
+    tab_todo:'All', tab_pasteleria:'Pastry', tab_bolleria:'Viennoiserie',
+    tab_pan:'Bread', tab_choco:'Chocolaterie',
+    badge_signature:'Signature', badge_artesanal:'Artisan', badge_clasico:'Classic',
+    prod1_desc:'Sicilian lemon cream on Belgian sablée pastry, topped with Italian meringue toasted to order.',
+    prod2_desc:'27 layers of hand-rolled flaky dough with Belgian AOP butter. Crispy outside, silky inside.',
+    prod3_desc:'Buttery pastry with two bars of 70% Belgian dark chocolate and a hazelnut praline heart.',
+    prod4_desc:'Three layers of caramelised puff pastry with Madagascar vanilla custard cream and fondant icing.',
+    chip_gluten:'Gluten', chip_huevo:'Egg', chip_lacteos:'Dairy',
+    chip_nofrutos:'No tree nuts', chip_frutos:'Tree nuts',
+    carta_btn:'Explore the full menu',
+    galeria_eyebrow:'Gallery',
+    galeria_titulo:'The pleasure of <em>the beautiful</em>',
+    ubi_eyebrow:'Find us',
+    ubi_titulo:'Visit us in <em>El Campello</em>',
+    lbl_direccion:'Address', lbl_maps:'View on Google Maps →',
+    lbl_telefono:'Phone', lbl_horarios:'Opening hours',
+    h_lun:'Monday', h_cerrado:'Closed',
+    h_marjue:'Tuesday — Thursday', h_vie:'Friday', h_sabdom:'Saturday — Sunday',
+    map_btn:'Open in Maps',
+    contact_eyebrow:'Reservations & Contact',
+    contact_titulo:'Do you have a <em>question?</em>',
+    contact_sub:'We would be delighted to assist you with special orders, private events or reservations.',
+    form_nombre:'Name', form_nombre_ph:'John Smith',
+    form_email:'Email', form_email_ph:'john@email.com',
+    form_motivo:'Subject', form_sel:'Select an option',
+    form_opt1:'Special order', form_opt2:'Private event',
+    form_opt3:'Reservation', form_opt4:'Other',
+    form_mensaje:'Message', form_mensaje_ph:'Tell us how we can help you…',
+    form_enviar:'Send message',
+    form_ok:'Thank you — We will get back to you shortly.',
+    footer_tagline:"The art of Belgian pastry,\nat the heart of the Costa Blanca.",
+    footer_nav_titulo:'Navigation', footer_contact_titulo:'Contact',
+    footer_copy:'© 2025 Pâtisserie Boulangerie Reiger. All rights reserved.',
+    footer_craft:'Belgian craftsmanship · El Campello',
+  },
+  nl: {
+    skip:'Naar inhoud',
+    nav_historia:'Geschiedenis', nav_carta:'Kaart', nav_galeria:'Galerij',
+    nav_ubicacion:'Locatie', nav_contacto:'Contact',
+    hero_tag:'El Campello, Alicante · Belgisch Vakmanschap sinds 1897',
+    hero_sub:'De kunst van Belgisch gebak, verfijnd met passie',
+    hero_cta1:'Bekijk de Kaart', hero_cta2:'Ons Verhaal', hero_scroll:'Scrollen',
+    stat_fundacion:'Oprichtingsjaar', stat_recetas:'Eigen recepten', stat_hora:'Begintijd',
+    tick1:'Belgische Botercroisssant', tick2:'Citroen-meringue Taart',
+    tick3:'Chocolade-praliné Broodje', tick4:'Vanille Mille-feuille',
+    tick5:'Belgisch Vakmanschap · El Campello', tick6:'Sinds 1897',
+    tick7:'Belgische AOP boter', tick8:'Elke ochtend vers gemaakt',
+    badge_since:'Sinds',
+    historia_eyebrow:'Ons Verhaal',
+    historia_titulo:'Belgische kunst aan <em>de kust</em>',
+    historia_p1:'De familie Reiger verfijnt al meer dan een eeuw de kunst van bakken en patisserie in België. Van de ateliers in Luik, waar we de geheimen van bladerdeeg leerden, tot de keukens van Brussel — elk recept is een gedicht geschreven in boter en geduld.',
+    historia_p2:"Vandaag, met precisieapparatuur rechtstreeks uit Europa en technieken die van generatie op generatie zijn doorgegeven, brengen we El Campello een unieke ervaring: authentieke Belgische kwaliteit in elke hap, elke ochtend voor het aanbreken van de dag bereid.",
+    historia_p3:'Onze filosofie is eenvoudig — de beste ingrediënten, de tijd die elk stuk verdient, en de trots van wie zijn werk met eigen naam ondertekent.',
+    tag1:'Ambachtelijk bladerdeeg', tag2:'Belgische AOP boter',
+    tag3:'Recepten uit 1897', tag4:'Zonder conserveermiddelen',
+    quote_text:'Patisserie is een kunst die je proeft met je ogen voordat je hem smaakt met je mond',
+    quote_attr:'— Belgische School voor Patisserie, Brussel',
+    carta_eyebrow:'Onze Kaart',
+    carta_titulo:'Een <em>voortreffelijke</em> selectie',
+    carta_sub:'Elke ochtend bereid met Belgische AOP boter voor het aanbreken van de dag',
+    tab_todo:'Alles', tab_pasteleria:'Patisserie', tab_bolleria:'Viennoiserie',
+    tab_pan:'Brood', tab_choco:'Chocolaterie',
+    badge_signature:'Signature', badge_artesanal:'Ambachtelijk', badge_clasico:'Klassiek',
+    prod1_desc:'Siciliaanse citroencrème op Belgisch sablée-deeg, bedekt met Italiaanse meringue direct gebrand.',
+    prod2_desc:'27 lagen met de hand gerold bladerdeeg met Belgische AOP boter. Krokant vanbuiten, zijdezacht vanbinnen.',
+    prod3_desc:'Boterdeeg met twee repen 70% Belgische pure chocolade en een hart van hazelnootpraliné.',
+    prod4_desc:'Drie lagen gekarameliseerd bladerdeeg met banketbakkersroom van Madagaskar-vanille en fondantglazuur.',
+    chip_gluten:'Gluten', chip_huevo:'Ei', chip_lacteos:'Zuivel',
+    chip_nofrutos:'Zonder noten', chip_frutos:'Noten',
+    carta_btn:'Volledige kaart bekijken',
+    galeria_eyebrow:'Galerij',
+    galeria_titulo:'Het genot van <em>het schone</em>',
+    ubi_eyebrow:'Ons vinden',
+    ubi_titulo:'Bezoek ons in <em>El Campello</em>',
+    lbl_direccion:'Adres', lbl_maps:'Bekijk op Google Maps →',
+    lbl_telefono:'Telefoon', lbl_horarios:'Openingstijden',
+    h_lun:'Maandag', h_cerrado:'Gesloten',
+    h_marjue:'Dinsdag — Donderdag', h_vie:'Vrijdag', h_sabdom:'Zaterdag — Zondag',
+    map_btn:'Openen in Maps',
+    contact_eyebrow:'Reserveringen & Contact',
+    contact_titulo:'Heeft u een <em>vraag?</em>',
+    contact_sub:'We helpen u graag met speciale bestellingen, privé-evenementen of reserveringen.',
+    form_nombre:'Naam', form_nombre_ph:'Jan Janssen',
+    form_email:'Email', form_email_ph:'jan@email.com',
+    form_motivo:'Onderwerp', form_sel:'Selecteer een optie',
+    form_opt1:'Speciale bestelling', form_opt2:'Privé-evenement',
+    form_opt3:'Reservering', form_opt4:'Ander',
+    form_mensaje:'Bericht', form_mensaje_ph:'Vertel ons hoe we u kunnen helpen…',
+    form_enviar:'Bericht versturen',
+    form_ok:'Dank u — Wij nemen zo snel mogelijk contact met u op.',
+    footer_tagline:"De kunst van Belgisch gebak,\nin het hart van de Costa Blanca.",
+    footer_nav_titulo:'Navigatie', footer_contact_titulo:'Contact',
+    footer_copy:'© 2025 Pâtisserie Boulangerie Reiger. Alle rechten voorbehouden.',
+    footer_craft:'Belgisch vakmanschap · El Campello',
+  }
+};
+
+/* ── setLang ── */
+let currentLang = 'es';
+
+function setLang(lang) {
+  if (!T[lang]) return;
+  currentLang = lang;
+  document.documentElement.lang = lang;
+
+  // Update all data-i18n text nodes
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (T[lang][key] !== undefined) {
+      el.innerHTML = T[lang][key];
+    }
+  });
+
+  // Update placeholders
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    if (T[lang][key]) el.placeholder = T[lang][key];
+  });
+
+  // Update flag buttons (nav + mob)
+  document.querySelectorAll('.flag-btn, .mob-flag').forEach(btn => {
+    const active = btn.dataset.lang === lang;
+    btn.classList.toggle('active', active);
+    btn.setAttribute('aria-pressed', String(active));
+  });
+}
+
+/* ── Nav scroll ── */
+const nav = document.getElementById('nav');
+const stb = document.getElementById('stb');
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  nav.classList.toggle('scrolled', y > 60);
+  stb.classList.toggle('vis', y > 500);
+}, { passive: true });
+stb.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+/* ── Mobile nav ── */
+const ham  = document.getElementById('ham');
+const mob  = document.getElementById('mobNav');
+const mobC = document.getElementById('mobClose');
+const openNav  = () => { mob.classList.add('open');  ham.setAttribute('aria-expanded','true');  document.body.style.overflow='hidden'; };
+const closeNav = () => { mob.classList.remove('open'); ham.setAttribute('aria-expanded','false'); document.body.style.overflow=''; };
+ham.addEventListener('click', openNav);
+mobC.addEventListener('click', closeNav);
+mob.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
+document.addEventListener('keydown', e => { if (e.key==='Escape') closeNav(); });
+
+/* ── Flag buttons (nav + mob) ── */
+document.querySelectorAll('.flag-btn, .mob-flag').forEach(btn => {
+  btn.addEventListener('click', () => {
+    setLang(btn.dataset.lang);
+    // close mobile nav if open
+    closeNav();
+  });
+});
+
+/* ── Particles ── */
+const pc = document.getElementById('particles');
+const cnt = window.innerWidth < 600 ? 12 : 22;
+for (let i = 0; i < cnt; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  const sz = Math.random() * 8 + 3;
+  p.style.cssText = `width:${sz}px;height:${sz}px;left:${Math.random()*100}%;animation-duration:${Math.random()*14+8}s;animation-delay:-${Math.random()*12}s;opacity:${Math.random()*.4+.1};`;
+  pc.appendChild(p);
+}
+
+/* ── Reveal ── */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.r').forEach(el => io.observe(el));
+
+/* ── Filter tabs ── */
+document.querySelectorAll('.f-tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.f-tab').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed','false'); });
+    btn.classList.add('active'); btn.setAttribute('aria-pressed','true');
+  });
+});
+
+/* ── Form ── */
+document.getElementById('cForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const btn = document.getElementById('sendBtn');
+  btn.disabled = true;
+  btn.querySelector('span').textContent = '…';
+  setTimeout(() => {
+    document.getElementById('cForm').style.display = 'none';
+    document.getElementById('formOk').style.display = 'block';
+  }, 1200);
+});
+
+/* ── Smooth scroll ── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - nav.offsetHeight - 16, behavior: 'smooth' }); }
+  });
+});
+
+/* ── Hero parallax ── */
+const heroBg = document.querySelector('.hero-bg');
+window.addEventListener('scroll', () => {
+  if (window.scrollY < window.innerHeight)
+    heroBg.style.transform = `scale(1.08) translateY(${window.scrollY * 0.12}px)`;
+}, { passive: true });
+
+/* ── Init ES ── */
+setLang('es');
+</script>
+</body>
+</html>
