@@ -9,9 +9,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 
-
-
-  
 <style>
 /* ============================================================
    TOKENS
@@ -641,11 +638,10 @@ footer { background: var(--dark-3); color: var(--inv); padding: clamp(3.5rem,7vw
     </h1>
     <p class="hero-sub" data-i18n="hero_sub">El arte de la pastelería belga, sublimado con pasión</p>
     <div class="hero-actions">
-      <a href="#carta" class="btn-primary">
+      <a href="carta.html" class="btn-primary">
         <span data-i18n="hero_cta1">Ver la Carta</span>
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
-      <a href="#historia" class="btn-ghost" data-i18n="hero_cta2">Nuestra Historia</a>
     </div>
   </div>
 
@@ -654,44 +650,7 @@ footer { background: var(--dark-3); color: var(--inv); padding: clamp(3.5rem,7vw
     <span data-i18n="hero_scroll">Scroll</span>
   </div>
 
-  <div class="hero-stats">
-    <div class="hero-stat">
-      <div class="hero-stat-num">1897</div>
-      <div class="hero-stat-label" data-i18n="stat_fundacion">Año de fundación</div>
-    </div>
-    <div class="hero-stat">
-      <div class="hero-stat-num">+60</div>
-      <div class="hero-stat-label" data-i18n="stat_recetas">Recetas propias</div>
-    </div>
-    <div class="hero-stat">
-      <div class="hero-stat-num">4:30</div>
-      <div class="hero-stat-label" data-i18n="stat_hora">Hora de inicio</div>
-    </div>
-  </div>
 </section>
-
-<!-- TICKER -->
-<div class="ticker" aria-hidden="true">
-  <div class="ticker-track" id="tickerTrack">
-    <span class="ticker-item" data-i18n="tick1">Croissant au Beurre Belge<span class="ticker-dot"></span></span>
-    <span class="ticker-item" data-i18n="tick2">Tarte au Citron Meringuée<span class="ticker-dot"></span></span>
-    <span class="ticker-item" data-i18n="tick3">Pain au Chocolat Praliné<span class="ticker-dot"></span></span>
-    <span class="ticker-item" data-i18n="tick4">Mille-feuille Vanille<span class="ticker-dot"></span></span>
-    <span class="ticker-item" data-i18n="tick5">Artisanat Belge · El Campello<span class="ticker-dot"></span></span>
-    <span class="ticker-item" data-i18n="tick6">Depuis 1897<span class="ticker-dot"></span></span>
-    <span class="ticker-item" data-i18n="tick7">Mantequilla AOP belga<span class="ticker-dot"></span></span>
-    <span class="ticker-item" data-i18n="tick8">Elaborado cada mañana<span class="ticker-dot"></span></span>
-    <!-- duplicado para loop -->
-    <span class="ticker-item" data-i18n="tick1">Croissant au Beurre Belge<span class="ticker-dot"></span></span>
-    <span class="ticker-item" data-i18n="tick2">Tarte au Citron Meringuée<span class="ticker-dot"></span></span>
-    <span class="ticker-item" data-i18n="tick3">Pain au Chocolat Praliné<span class="ticker-dot"></span></span>
-    <span class="ticker-item" data-i18n="tick4">Mille-feuille Vanille<span class="ticker-dot"></span></span>
-    <span class="ticker-item" data-i18n="tick5">Artisanat Belge · El Campello<span class="ticker-dot"></span></span>
-    <span class="ticker-item" data-i18n="tick6">Depuis 1897<span class="ticker-dot"></span></span>
-    <span class="ticker-item" data-i18n="tick7">Mantequilla AOP belga<span class="ticker-dot"></span></span>
-    <span class="ticker-item" data-i18n="tick8">Elaborado cada mañana<span class="ticker-dot"></span></span>
-  </div>
-</div>
 
 <!-- HISTORIA -->
 <section id="historia" class="section-py" aria-label="Historia">
@@ -741,17 +700,17 @@ footer { background: var(--dark-3); color: var(--inv); padding: clamp(3.5rem,7vw
       <h2 class="section-title light r d1" data-i18n="carta_titulo">Una selección <em>exquisita</em></h2>
       <p class="r d2" data-i18n="carta_sub">Elaborado con mantequilla belga AOP cada mañana antes del amanecer</p>
     </header>
-    <div class="filter-tabs r" role="group">
-      <button class="f-tab active" aria-pressed="true" data-i18n="tab_todo">Todo</button>
-      <button class="f-tab" aria-pressed="false" data-i18n="tab_pasteleria">Pastelería</button>
-      <button class="f-tab" aria-pressed="false" data-i18n="tab_bolleria">Bollería</button>
-      <button class="f-tab" aria-pressed="false" data-i18n="tab_pan">Pan</button>
-      <button class="f-tab" aria-pressed="false" data-i18n="tab_choco">Chocolatería</button>
+    <div class="filter-tabs r" role="group" id="filterTabs">
+      <button class="f-tab active" aria-pressed="true" data-filter="todo" data-i18n="tab_todo">Todo</button>
+      <button class="f-tab" aria-pressed="false" data-filter="pasteleria" data-i18n="tab_pasteleria">Pastelería</button>
+      <button class="f-tab" aria-pressed="false" data-filter="bolleria" data-i18n="tab_bolleria">Bollería</button>
+      <button class="f-tab" aria-pressed="false" data-filter="pan" data-i18n="tab_pan">Pan</button>
+      <button class="f-tab" aria-pressed="false" data-filter="choco" data-i18n="tab_choco">Chocolatería</button>
     </div>
-    <div class="products-grid">
-      <article class="p-card r">
+    <div class="products-grid" id="cartaGrid">
+      <article class="p-card r" data-cat="pasteleria">
         <div class="p-img-wrap">
-          <img src="https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=600&h=412&auto=format&fit=crop&q=85" alt="Tarte au Citron Meringuée" class="p-img" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=600&q=85" alt="Tarte au Citron Meringuée" class="p-img" loading="lazy">
           <span class="p-badge" data-i18n="badge_signature">Signature</span>
         </div>
         <div class="p-body">
@@ -768,9 +727,9 @@ footer { background: var(--dark-3); color: var(--inv); padding: clamp(3.5rem,7vw
           </div>
         </div>
       </article>
-      <article class="p-card r d1">
+      <article class="p-card r d1" data-cat="bolleria">
         <div class="p-img-wrap">
-          <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600&h=412&auto=format&fit=crop&q=85" alt="Croissant au Beurre Belge" class="p-img" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=600&q=85" alt="Croissant au Beurre Belge" class="p-img" loading="lazy">
           <span class="p-badge" data-i18n="badge_artesanal">Artesanal</span>
         </div>
         <div class="p-body">
@@ -786,9 +745,9 @@ footer { background: var(--dark-3); color: var(--inv); padding: clamp(3.5rem,7vw
           </div>
         </div>
       </article>
-      <article class="p-card r d2">
+      <article class="p-card r d2" data-cat="bolleria">
         <div class="p-img-wrap">
-          <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&h=412&auto=format&fit=crop&q=85" alt="Pain au Chocolat" class="p-img" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=85" alt="Pain au Chocolat" class="p-img" loading="lazy">
           <span class="p-badge" data-i18n="badge_clasico">Clásico</span>
         </div>
         <div class="p-body">
@@ -804,9 +763,9 @@ footer { background: var(--dark-3); color: var(--inv); padding: clamp(3.5rem,7vw
           </div>
         </div>
       </article>
-      <article class="p-card r d3">
+      <article class="p-card r d3" data-cat="pasteleria">
         <div class="p-img-wrap">
-          <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600&h=412&auto=format&fit=crop&q=85" alt="Mille-feuille Vanille" class="p-img" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=600&q=85" alt="Mille-feuille Vanille" class="p-img" loading="lazy">
           <span class="p-badge" data-i18n="badge_signature">Signature</span>
         </div>
         <div class="p-body">
@@ -823,9 +782,45 @@ footer { background: var(--dark-3); color: var(--inv); padding: clamp(3.5rem,7vw
           </div>
         </div>
       </article>
+      <article class="p-card r d4" data-cat="pan">
+        <div class="p-img-wrap">
+          <img src="https://images.unsplash.com/photo-1549931319-a545dcf3bc7b?auto=format&fit=crop&w=600&q=85" alt="Baguette Tradition" class="p-img" loading="lazy">
+          <span class="p-badge" data-i18n="badge_artesanal">Artesanal</span>
+        </div>
+        <div class="p-body">
+          <h3 class="p-name">Baguette Tradition</h3>
+          <p class="p-desc" data-i18n="prod5_desc">Baguette tradicional con corteza crujiente dorada y miga alveolada. Fermentación lenta de 24 horas.</p>
+          <div class="p-footer">
+            <span class="p-price">2,20 €</span>
+            <div class="allergens">
+              <span class="chip" data-i18n="chip_gluten">Gluten</span>
+              <span class="chip ok" data-i18n="chip_nolacteos">Sin lácteos</span>
+              <span class="chip ok" data-i18n="chip_nofrutos">Sin frutos secos</span>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="p-card r d5" data-cat="choco">
+        <div class="p-img-wrap">
+          <img src="https://images.unsplash.com/photo-1481391319762-47dff72954d9?auto=format&fit=crop&w=600&q=85" alt="Truffes Belges" class="p-img" loading="lazy">
+          <span class="p-badge" data-i18n="badge_signature">Signature</span>
+        </div>
+        <div class="p-body">
+          <h3 class="p-name">Truffes Belges</h3>
+          <p class="p-desc" data-i18n="prod6_desc">Trufas de chocolate negro belga 72% con ganache de nata fresca, rebozadas en cacao puro. Caja de 6.</p>
+          <div class="p-footer">
+            <span class="p-price">6,50 €</span>
+            <div class="allergens">
+              <span class="chip" data-i18n="chip_lacteos">Lácteos</span>
+              <span class="chip ok" data-i18n="chip_nogluten">Sin gluten</span>
+              <span class="chip ok" data-i18n="chip_nofrutos">Sin frutos secos</span>
+            </div>
+          </div>
+        </div>
+      </article>
     </div>
     <div class="carta-footer r">
-      <a href="#contacto" class="btn-outline-light">
+      <a href="carta.html" class="btn-outline-light">
         <span data-i18n="carta_btn">Explorar la carta completa</span>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
@@ -1037,8 +1032,11 @@ const T = {
     prod2_desc:'27 capas de masa hojaldrada elaboradas a mano con mantequilla AOP belga. Crujiente por fuera, sedoso por dentro.',
     prod3_desc:'Hojaldre mantequillado con dos barras de chocolate negro belga 70% y corazón de praliné de avellanas.',
     prod4_desc:'Tres capas de hojaldre caramelizado con crema pastelera de vainilla de Madagascar y glaseado fondant.',
+    prod5_desc:'Baguette tradicional con corteza crujiente dorada y miga alveolada. Fermentación lenta de 24 horas.',
+    prod6_desc:'Trufas de chocolate negro belga 72% con ganache de nata fresca, rebozadas en cacao puro. Caja de 6.',
     chip_gluten:'Gluten', chip_huevo:'Huevo', chip_lacteos:'Lácteos',
     chip_nofrutos:'Sin frutos secos', chip_frutos:'Frutos secos',
+    chip_nolacteos:'Sin lácteos', chip_nogluten:'Sin gluten',
     carta_btn:'Explorar la carta completa',
     galeria_eyebrow:'Galerie',
     galeria_titulo:'El placer de <em>lo bello</em>',
@@ -1097,8 +1095,11 @@ const T = {
     prod2_desc:"27 couches de pâte feuilletée faites à la main avec du beurre AOP belge. Croustillant dehors, soyeux dedans.",
     prod3_desc:"Feuilletage beurré avec deux barres de chocolat noir belge 70% et cœur de praliné aux noisettes.",
     prod4_desc:"Trois couches de feuilletage caramélisé avec crème pâtissière à la vanille de Madagascar et glaçage fondant.",
+    prod5_desc:"Baguette tradition à la croûte dorée croustillante et mie alvéolée. Fermentation lente de 24 heures.",
+    prod6_desc:"Truffes en chocolat noir belge 72% avec ganache à la crème fraîche, roulées dans du cacao pur. Boîte de 6.",
     chip_gluten:'Gluten', chip_huevo:'Œuf', chip_lacteos:'Laitiers',
     chip_nofrutos:'Sans fruits à coque', chip_frutos:'Fruits à coque',
+    chip_nolacteos:'Sans laitiers', chip_nogluten:'Sans gluten',
     carta_btn:'Explorer la carte complète',
     galeria_eyebrow:'Galerie',
     galeria_titulo:'Le plaisir de <em>la beauté</em>',
@@ -1157,8 +1158,11 @@ const T = {
     prod2_desc:'27 layers of hand-rolled flaky dough with Belgian AOP butter. Crispy outside, silky inside.',
     prod3_desc:'Buttery pastry with two bars of 70% Belgian dark chocolate and a hazelnut praline heart.',
     prod4_desc:'Three layers of caramelised puff pastry with Madagascar vanilla custard cream and fondant icing.',
+    prod5_desc:'Traditional baguette with golden crispy crust and open-crumb interior. 24-hour slow fermentation.',
+    prod6_desc:'Belgian 72% dark chocolate truffles with fresh cream ganache, rolled in pure cocoa powder. Box of 6.',
     chip_gluten:'Gluten', chip_huevo:'Egg', chip_lacteos:'Dairy',
     chip_nofrutos:'No tree nuts', chip_frutos:'Tree nuts',
+    chip_nolacteos:'Dairy free', chip_nogluten:'Gluten free',
     carta_btn:'Explore the full menu',
     galeria_eyebrow:'Gallery',
     galeria_titulo:'The pleasure of <em>the beautiful</em>',
@@ -1217,8 +1221,11 @@ const T = {
     prod2_desc:'27 lagen met de hand gerold bladerdeeg met Belgische AOP boter. Krokant vanbuiten, zijdezacht vanbinnen.',
     prod3_desc:'Boterdeeg met twee repen 70% Belgische pure chocolade en een hart van hazelnootpraliné.',
     prod4_desc:'Drie lagen gekarameliseerd bladerdeeg met banketbakkersroom van Madagaskar-vanille en fondantglazuur.',
+    prod5_desc:'Traditionele baguette met goudbruin krokant korstje en luchtige kruim. 24 uur langzaam gerezen.',
+    prod6_desc:'Belgische truffels van 72% pure chocolade met ganache van verse room, gerold in puur cacaopoeder. Doos van 6.',
     chip_gluten:'Gluten', chip_huevo:'Ei', chip_lacteos:'Zuivel',
     chip_nofrutos:'Zonder noten', chip_frutos:'Noten',
+    chip_nolacteos:'Zonder zuivel', chip_nogluten:'Glutenvrij',
     carta_btn:'Volledige kaart bekijken',
     galeria_eyebrow:'Galerij',
     galeria_titulo:'Het genot van <em>het schone</em>',
@@ -1325,10 +1332,15 @@ const io = new IntersectionObserver(entries => {
 document.querySelectorAll('.r').forEach(el => io.observe(el));
 
 /* ── Filter tabs ── */
-document.querySelectorAll('.f-tab').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.f-tab').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed','false'); });
-    btn.classList.add('active'); btn.setAttribute('aria-pressed','true');
+document.getElementById('filterTabs').addEventListener('click', e => {
+  const btn = e.target.closest('.f-tab');
+  if (!btn) return;
+  document.querySelectorAll('.f-tab').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed','false'); });
+  btn.classList.add('active'); btn.setAttribute('aria-pressed','true');
+  const filter = btn.dataset.filter;
+  document.querySelectorAll('#cartaGrid .p-card').forEach(card => {
+    const show = filter === 'todo' || card.dataset.cat === filter;
+    card.style.display = show ? '' : 'none';
   });
 });
 
