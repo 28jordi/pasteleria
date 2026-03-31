@@ -137,6 +137,7 @@ button, input, textarea, select { font: inherit; }
   background: none; border: none; cursor: pointer;
   padding: 6px; min-width: 44px; min-height: 44px;
   align-items: center; justify-content: center;
+  color: inherit;
 }
 .h-bar { width: 20px; height: 1.5px; background: currentColor; transition: all .3s; display: block; }
 .hamburger[aria-expanded=true] .h-bar:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
@@ -617,9 +618,6 @@ footer { background: var(--dark-3); color: var(--inv); padding: clamp(3.5rem,7vw
 
 <!-- MOBILE NAV -->
 <div class="mob-nav" id="mobNav" role="dialog" aria-modal="true">
-  <button class="mob-close" id="mobClose" aria-label="Cerrar">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
-  </button>
   <a href="index.html" data-i18n="nav_home">Inicio</a>
   <a href="index.html#historia" data-i18n="nav_historia">Historia</a>
   <a href="index.html#carta"    data-i18n="nav_carta">Carta</a>
@@ -1395,11 +1393,9 @@ stb.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth'
 /* ── Mobile nav ── */
 const ham  = document.getElementById('ham');
 const mob  = document.getElementById('mobNav');
-const mobC = document.getElementById('mobClose');
 const openNav  = () => { mob.classList.add('open');  ham.setAttribute('aria-expanded','true');  document.body.style.overflow='hidden'; };
 const closeNav = () => { mob.classList.remove('open'); ham.setAttribute('aria-expanded','false'); document.body.style.overflow=''; };
-ham.addEventListener('click', openNav);
-mobC.addEventListener('click', closeNav);
+ham.addEventListener('click', () => mob.classList.contains('open') ? closeNav() : openNav());
 mob.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
 document.addEventListener('keydown', e => { if (e.key==='Escape') closeNav(); });
 
