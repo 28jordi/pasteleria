@@ -186,7 +186,11 @@ button, input, textarea, select { font: inherit; }
   .hamburger { display: flex; }
   #nav { padding: 1.2rem 1.5rem; }
   #nav.scrolled { padding: .85rem 1.5rem; }
-  .flag-code { display: none; }   /* solo bandera en móvil, sin código */
+  .flag-code { display: none; }
+}
+@media (max-width: 600px) {
+  /* Ocultar banderas del nav en móvil — accesibles desde el menú hamburguesa */
+  .lang-flags { display: none; }
 }
 
 /* ============================================================
@@ -1473,3 +1477,4 @@ if (savedLang && T[savedLang]) {
 </script>
 </body>
 </html>
+
